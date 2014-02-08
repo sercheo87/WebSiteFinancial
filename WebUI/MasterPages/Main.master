@@ -1,77 +1,92 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="MasterPages_Main" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:Literal runat="server" Text="<%$Resources: WebUILabels, ApplicationName%>" /></title>
-    <asp:ContentPlaceHolder id="MasterHeadContent" runat="server" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <asp:Literal runat="server" Text="<%$Resources: WebUILabels, ApplicationName%>" />
+    </title>
+    <asp:ContentPlaceHolder ID="MasterHeadContent" runat="server" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
 </head>
-<body>
-    <form runat="server">
-        <asp:ScriptManager ID="scriptManager" runat="server">
-            <Scripts>
-                <asp:ScriptReference Path="~/Scripts/jquery-1.9.1.min.js" />
-                <asp:ScriptReference Path="~/Scripts/jquery-ui-1.10.1.custom.min.js" />
-                <asp:ScriptReference Path="~/Scripts/jquery.maskedinput.js" />
-                <asp:ScriptReference Path="~/Scripts/validations.js" />
-            </Scripts>
-        </asp:ScriptManager>
-        <asp:ContentPlaceHolder id="MasterMainContent" runat="server" />
-        <!-- MESSAGE WINDOW - BEGIN -->
-        <asp:UpdatePanel ID="messagesPanel" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>                                                                                                
-                <asp:Panel ID="messagesOverlay" ClientIDMode="Static" style="display:none;" runat="server" CssClass="overlay">
-                    <div class="center">
-                        <table class="messagesTable">
-                            <tr><td class="caption" colspan="2"><asp:Literal ID="messageCaption" runat="server" /></td></tr>
-                            <tr>
-                                <td class="icon">
-                                    <div id="messageAsteriskIcon" runat="server" />
-                                    <div id="messageErrorIcon" runat="server" />
-                                    <div id="messageExclamationIcon" runat="server" />
-                                    <div id="messageHandIcon" runat="server" />
-                                    <div id="messageInformationIcon" runat="server" />
-                                    <div id="messageQuestionIcon" runat="server" />
-                                    <div id="messageStopIcon" runat="server" />
-                                    <div id="messageWarningIcon" runat="server" />
-                                </td>
-                                <td class="text"><asp:Literal ID="messageText" runat="server" /></td>
-                            </tr>
-                            <tr>
-                                <td class="buttonsBar" colspan="2">
-                                    <input type="button" id="buttonAccept" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Accept%>" />
-                                    <input type="button" id="buttonAbort" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Abort%>" />
-                                    <input type="button" id="buttonRetry" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Retry%>" />
-                                    <input type="button" id="buttonIgnore" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Ignore%>" />
-                                    <input type="button" id="buttonYes" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Yes%>" />
-                                    <input type="button" id="buttonNo" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, No%>" />
-                                    <input type="button" id="buttonCancel" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Cancel%>" />
-                                    <asp:Button ID="buttonServerAccept" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Accept%>" OnCommand="messageButton_OnCommand" CommandArgument="ACCEPT" />
-                                    <asp:Button ID="buttonServerAbort" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Abort%>" OnCommand="messageButton_OnCommand" CommandArgument="ABORT" />
-                                    <asp:Button ID="buttonServerRetry" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Retry%>" OnCommand="messageButton_OnCommand" CommandArgument="RETRY" />
-                                    <asp:Button ID="buttonServerIgnore" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Ignore%>" OnCommand="messageButton_OnCommand" CommandArgument="IGNORE" />
-                                    <asp:Button ID="buttonServerYes" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Yes%>" OnCommand="messageButton_OnCommand" CommandArgument="YES" />
-                                    <asp:Button ID="buttonServerNo" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, No%>" OnCommand="messageButton_OnCommand" CommandArgument="NO" />
-                                    <asp:Button ID="buttonServerCancel" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Cancel%>" OnCommand="messageButton_OnCommand" CommandArgument="CANCEL" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </asp:Panel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <!-- MESSAGE WINDOW - END -->
-        <!-- HELP OVERLAY - BEGIN -->
-        <asp:Panel ID="helpOverlay" ClientIDMode="Static" style="display:none;" runat="server" CssClass="overlay">
-            <div class="center">
-                <div class="helpWindow">
-                    <div class="close-flyout"></div>
-                    <div class="content">
-                        <asp:ContentPlaceHolder id="MasterHelpContent" runat="server" />
+<body role="document">
+    <div role="main" class="container">
+        <form runat="server">
+            <asp:ScriptManager ID="scriptManager" runat="server">
+                <Scripts>
+                    <asp:ScriptReference Path="~/Scripts/jquery-2.1.0.js" />
+                    <asp:ScriptReference Path="~/Scripts/jquery-ui-1.10.4.js" />
+                    <asp:ScriptReference Path="~/Scripts/jquery.maskedinput.js" />
+                    <asp:ScriptReference Path="~/Scripts/validations.js" />
+                    <asp:ScriptReference Path="~/Scripts/bootstrap.js" />
+                </Scripts>
+            </asp:ScriptManager>
+            <asp:ContentPlaceHolder ID="MasterMainContent" runat="server" />
+            <!-- MESSAGE WINDOW - BEGIN -->
+            <asp:UpdatePanel ID="messagesPanel" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:Panel ID="messagesOverlay" ClientIDMode="Static" Style="display: none;" runat="server" CssClass="overlay">
+                        <div class="center">
+                            <table class="messagesTable">
+                                <tr>
+                                    <td class="caption" colspan="2">
+                                        <asp:Literal ID="messageCaption" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="icon">
+                                        <div id="messageAsteriskIcon" runat="server" />
+                                        <div id="messageErrorIcon" runat="server" />
+                                        <div id="messageExclamationIcon" runat="server" />
+                                        <div id="messageHandIcon" runat="server" />
+                                        <div id="messageInformationIcon" runat="server" />
+                                        <div id="messageQuestionIcon" runat="server" />
+                                        <div id="messageStopIcon" runat="server" />
+                                        <div id="messageWarningIcon" runat="server" />
+                                    </td>
+                                    <td class="text">
+                                        <asp:Literal ID="messageText" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="buttonsBar" colspan="2">
+                                        <input type="button" id="buttonAccept" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Accept%>" />
+                                        <input type="button" id="buttonAbort" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Abort%>" />
+                                        <input type="button" id="buttonRetry" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Retry%>" />
+                                        <input type="button" id="buttonIgnore" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Ignore%>" />
+                                        <input type="button" id="buttonYes" visible="false" class="default close-flyout" runat="server" value="<%$Resources: WebUILabels, Yes%>" />
+                                        <input type="button" id="buttonNo" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, No%>" />
+                                        <input type="button" id="buttonCancel" visible="false" class="close-flyout" runat="server" value="<%$Resources: WebUILabels, Cancel%>" />
+                                        <asp:Button ID="buttonServerAccept" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Accept%>" OnCommand="messageButton_OnCommand" CommandArgument="ACCEPT" />
+                                        <asp:Button ID="buttonServerAbort" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Abort%>" OnCommand="messageButton_OnCommand" CommandArgument="ABORT" />
+                                        <asp:Button ID="buttonServerRetry" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Retry%>" OnCommand="messageButton_OnCommand" CommandArgument="RETRY" />
+                                        <asp:Button ID="buttonServerIgnore" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Ignore%>" OnCommand="messageButton_OnCommand" CommandArgument="IGNORE" />
+                                        <asp:Button ID="buttonServerYes" Visible="false" CssClass="default close-flyout" runat="server" Text="<%$Resources: WebUILabels, Yes%>" OnCommand="messageButton_OnCommand" CommandArgument="YES" />
+                                        <asp:Button ID="buttonServerNo" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, No%>" OnCommand="messageButton_OnCommand" CommandArgument="NO" />
+                                        <asp:Button ID="buttonServerCancel" Visible="false" CssClass="close-flyout" runat="server" Text="<%$Resources: WebUILabels, Cancel%>" OnCommand="messageButton_OnCommand" CommandArgument="CANCEL" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <!-- MESSAGE WINDOW - END -->
+            <!-- HELP OVERLAY - BEGIN -->
+            <asp:Panel ID="helpOverlay" ClientIDMode="Static" Style="display: none;" runat="server" CssClass="overlay">
+                <div class="center">
+                    <div class="helpWindow">
+                        <div class="close-flyout"></div>
+                        <div class="content">
+                            <asp:ContentPlaceHolder ID="MasterHelpContent" runat="server" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </asp:Panel>
-        <!-- HELP OVERLAY - END -->
-    </form>
+            </asp:Panel>
+            <!-- HELP OVERLAY - END -->
+        </form>
+    </div>
 </body>
 </html>

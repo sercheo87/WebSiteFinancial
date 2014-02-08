@@ -1,4 +1,7 @@
 ﻿Sys.Application.add_load(function () {
+    //Activate ToolTip
+    $("a[data-toggle='tooltip']").tooltip();
+
     //Close all modal windows
     $('.close-flyout').click(function () {
         $(this).parents('.overlay').hide();
@@ -48,11 +51,11 @@
             $(this).mask(mask);
     });
     //Configure ToolTips
-    $('[toolTipText]').bind('focus', function () {
-        $(this).showToolTip();
+    $('[title]').bind('focus', function () {
+        $(this).tooltip('show');
     });
-    $('[toolTipText]').bind('blur', function () {
-        $(this).hideToolTip();
+    $('[title]').bind('blur', function () {
+        $(this).tooltip('hide');
     });
     //Initialize vertical menues
     $('.vertical-menu').verticalMenuInit();
@@ -332,7 +335,7 @@ $.fn.validateEquality = function () {
 //It must not be used for general propose validations. 
 $.fn.validateCounters = function (counters) {
     if ($(this).hasClass('invalid-field') ||
-        $(this).hasClass('invalid-equality') || 
+        $(this).hasClass('invalid-equality') ||
         $(this).hasClass('invalid-custom')) {
         counters.invalidFields++;
     }
@@ -363,10 +366,17 @@ $.fn.validate = function (options) {
         if (validationGroup == opts.validationGroup) {
             if ($(this).hasClass('required')) {
                 if ($(this).val() == null || trim($(this).val()) == '' || $(this).val() == $(this).attr('unselectedValue')) {
-                    $(this).addClass('missing-field');
+                    var parent = $(this).parent();
+                    parent.addClass('has-error has-feedback');
+                    parent.append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+
                     counters.missingFields++;
                 } else {
-                    $(this).removeClass('missing-field');
+                    var parent = $(this).parent();
+                    parent.removeClass('has-error has-feedback');
+                    parent.find('span').remove();
+                    parent.addClass('has-success has-feedback');
+                    parent.append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
                 }
             }
             $(this).validateCounters(counters);
@@ -451,7 +461,7 @@ $.fn.addMenuItemHandler = function (menu) {
             }
         });
         menuItemHandler.push($(this)[0])
-    } 
+    }
 }
 
 $.fn.verticalMenuInit = function () {

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 public partial class Views_UserControls_MessageZone : WebUserControl<object>
 {
-    public enum MessageTypeEnum { Error, Warning, Information };
+    public enum MessageTypeEnum { Error, Warning, Info, Success };
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
@@ -17,7 +17,7 @@ public partial class Views_UserControls_MessageZone : WebUserControl<object>
 
     protected void SetControlStyle()
     {
-        mainFrame.CssClass = string.Format("message-zone {0} {1}", MessageType.ToString().ToLower(), CssClass).Trim();
+        mainFrame.CssClass = string.Format("alert alert-{0} {1}", MessageType.ToString().ToLower(), CssClass).Trim();
     }
 
     public string CssClass
@@ -38,7 +38,7 @@ public partial class Views_UserControls_MessageZone : WebUserControl<object>
     {
         get { return base.ID; }
         set
-        { 
+        {
             base.ID = value;
             mainFrame.Attributes["controlID"] = value;
         }
@@ -51,7 +51,7 @@ public partial class Views_UserControls_MessageZone : WebUserControl<object>
             object value = GetPersistentValue("MessageType");
 
             if (value == null)
-                return MessageTypeEnum.Information;
+                return MessageTypeEnum.Info;
 
             return (MessageTypeEnum)value;
         }

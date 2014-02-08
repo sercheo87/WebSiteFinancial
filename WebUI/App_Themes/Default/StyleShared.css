@@ -1,0 +1,44 @@
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .publicity {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #4b6c9e;
+    border-width: 1px;
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    width: 100%;
+    height: 300px;
+  }
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .publicity {
+    position: relative;
+    padding: 45px 15px 15px;
+    margin: 0 -15px 15px;
+    background-color: #696969;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px 0;
+    width: 100%;
+    height: 300px;
+  }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .publicity {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f5ff13;
+    border-width: 1px;
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    width: 100%;
+    height: 300px;
+  }
+}
+/*# sourceMappingURL=StyleShared.css.map */

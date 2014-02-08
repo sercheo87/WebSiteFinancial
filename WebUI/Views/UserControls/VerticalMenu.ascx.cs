@@ -37,23 +37,30 @@ public partial class Views_UserControls_VerticalMenu : WebUserControl<VerticalMe
     {
         foreach (Menu.MenuItem option in options.Where(x => x.ParentID == ParentID))
         {
+            //ITEM PARENT MENU
             HtmlGenericControl li = new HtmlGenericControl("li");
 
             if (options.Where(x => x.ParentID == option.ID).Count() > 0)
             {
-                HtmlGenericControl div = new HtmlGenericControl("div");
+                HtmlGenericControl a = new HtmlGenericControl("a");
                 HtmlGenericControl ul = new HtmlGenericControl("ul");
+                HtmlGenericControl b = new HtmlGenericControl("b");
 
-                div.Attributes.Add("class", "menu-header");
-                div.Attributes.Add("key", option.ID.ToString());
-                div.InnerText = option.Resource.Trim();
+
+                b.Attributes.Add("class", "caret");
+                a.Attributes.Add("class", "dropdown-toggle");
+                a.Attributes.Add("data-toggle", "dropdown");
+                a.Attributes.Add("key", option.ID.ToString());
+                a.InnerText = option.Resource.Trim();
+                ul.Attributes.Add("class", "dropdown-menu");
 
                 if (!string.IsNullOrWhiteSpace(option.Icon))
-                    div.Attributes.Add("icon", option.Icon.Trim());
+                    a.Attributes.Add("icon", option.Icon.Trim());
 
                 RenderOptions(ul, options, option.ID);
-
-                li.Controls.Add(div);
+                a.Controls.Add(b);
+                li.Attributes.Add("class", "dropdown");
+                li.Controls.Add(a);
                 li.Controls.Add(ul);
             }
             else if (string.IsNullOrWhiteSpace(option.Link))
@@ -71,21 +78,13 @@ public partial class Views_UserControls_VerticalMenu : WebUserControl<VerticalMe
             }
             else
             {
-                HtmlGenericControl div = new HtmlGenericControl("div");
-                LinkButton a = new LinkButton();
+                LinkButton lb = new LinkButton();
 
-                div.Attributes.Add("class", "menu-item");
-                div.Attributes.Add("key", option.ID.ToString());
-
-                if (!string.IsNullOrWhiteSpace(option.Icon))
-                    div.Attributes.Add("icon", option.Icon.Trim());
-                
-                a.Text = option.Resource.Trim();
-                a.CommandArgument = option.Link;
-                a.Command += new CommandEventHandler(link_Command);
-
-                div.Controls.Add(a);
-                li.Controls.Add(div);
+                lb.Attributes.Add("key", option.ID.ToString());
+                lb.Text = option.Resource.Trim();
+                lb.CommandArgument = option.Link;
+                lb.Command += new CommandEventHandler(link_Command);
+                li.Controls.Add(lb);
             }
 
             root.Controls.Add(li);
