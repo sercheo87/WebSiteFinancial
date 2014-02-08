@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0A1055F3-B6CB-40C2-B4C1-B1BFCA1938F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Presentation.Security</RootNamespace>
+    <AssemblyName>Presentation.Security</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChangePasswordPresenter.cs" />
+    <Compile Include="IChangePasswordView.cs" />
+    <Compile Include="ILoginView.cs" />
+    <Compile Include="ILogoutView.cs" />
+    <Compile Include="LoginPresenter.cs" />
+    <Compile Include="LogoutPresenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adapters.Interfaces.Commons\Adapters.Interfaces.Commons.csproj">
+      <Project>{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}</Project>
+      <Name>Adapters.Interfaces.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adapters.Interfaces.Security\Adapters.Interfaces.Security.csproj">
+      <Project>{7A640C78-320A-43EF-898E-711808D50449}</Project>
+      <Name>Adapters.Interfaces.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation.Commons\Presentation.Commons.csproj">
+      <Project>{443E19FE-2823-43C8-AFD5-5701172F4CD1}</Project>
+      <Name>Presentation.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Commons\Shared.Commons.csproj">
+      <Project>{4738C484-3A15-4CFD-B98C-2CFE71FDBB1B}</Project>
+      <Name>Shared.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Infrastructure.Messaging\Shared.Infrastructure.Messaging.csproj">
+      <Project>{15962882-22EB-4938-B6DE-F58AD48A74BC}</Project>
+      <Name>Shared.Infrastructure.Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

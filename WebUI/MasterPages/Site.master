@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/Main.master" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="MasterPages_Site" %>
+<asp:Content ContentPlaceHolderID="MasterHeadContent" Runat="Server">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MasterMainContent" Runat="Server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1><asp:Literal runat="server" Text="<%$Resources: WebUILabels, ApplicationName%>"></asp:Literal></h1>
+            </div>
+            <div class="loginDisplay">
+                <asp:LoginView runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        [ <asp:LinkButton runat="server" Text="<%$Resources: WebUILabels, LogIn %>" OnCommand="loginDisplay_Command" CommandName="LOGIN" /> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        [ <asp:LinkButton runat="server" Text="<%$Resources: WebUILabels, LogOut %>" OnCommand="loginDisplay_Command" CommandName="LOGOUT" /> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <div class="clear headerBar">
+            </div>
+        </div>
+        <uc:VerticalMenu ID="masterVerticalMenu" runat="server" Ordered="true" />
+        <div class="main">
+            <uc:MessageZone ID="masterValidationSuccessMessage" MessageType="Information" Text="<%$Resources: WebUIMessages, DefaultValidationSuccess%>" runat="server" />
+            <uc:MessageZone ID="masterValidationErrorMessage" MessageType="Warning" Text="<%$Resources: WebUIMessages, DefaultValidationError%>" runat="server" />
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MasterHelpContent" Runat="Server">
+    <asp:ContentPlaceHolder ID="HelpContent" runat="server" />
+</asp:Content>
