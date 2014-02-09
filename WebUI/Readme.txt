@@ -34,3 +34,5 @@ Características:
         <!--<navigate url="Tests_Condition/ConfirmCond1" condition="([[({SUM}[MyProducts].AmmountAvailable)]]>=100);"/>-->
         <!--TEST LIST OBJECT EVAL BOOLEAN-->
         <!--<navigate url="Tests_Condition/ConfirmCond1" condition="([MyFlag]==110)#AND#([MyProducts].Count>1)#AND#([MyProducts].Count>1)#AND#([[([MyProducts].Currency=='4')]]);"/>-->
+
+Update-Package -Reinstall
