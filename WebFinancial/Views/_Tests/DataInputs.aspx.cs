@@ -8,6 +8,7 @@ using Presentation.Test;
 
 public partial class Views__Tests_DataInputs : WebView<DataInputPresenter>, IDataInput
 {
+    #region "Interface"
     protected void messagesButton_OnClick(object sender, EventArgs e)
     {
         Presenter.Execute();
@@ -22,5 +23,12 @@ public partial class Views__Tests_DataInputs : WebView<DataInputPresenter>, IDat
     public string Code
     {
         get { return "codeVal"; }
+    }
+    #endregion
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+        }
     }
 }
