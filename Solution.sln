@@ -87,6 +87,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{930B90
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Demo", "05. Demo", "{AE0926F9-A54D-4F03-8835-736F64C3FC94}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial(4)", "http://localhost:51128", "{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{4738c484-3a15-4cfd-b98c-2cfe71fdbb1b}|Shared.Commons.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{15962882-22eb-4938-b6de-f58ad48a74bc}|Shared.Infrastructure.Messaging.dll;{bea4894f-6661-4352-9bc2-63ae1094575d}|Shared.IoC.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;{443e19fe-2823-43c8-afd5-5701172f4cd1}|Presentation.Commons.dll;{8b14f8e7-c8e1-473c-b97b-d8fef94571c3}|Presentation.Menu.dll;{0a1055f3-b6cb-40c2-b4c1-b1bfca1938f9}|Presentation.Security.dll;{80edb011-2538-4f5f-8702-335c0bb97274}|Presentation.Test.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51128"
+		Debug.AspNetCompiler.PhysicalPath = "WebFinancial\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51128\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51128"
+		Release.AspNetCompiler.PhysicalPath = "WebFinancial\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51128\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "WebFinancial\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +190,10 @@ Global
 		{A9D26373-99CE-4961-A869-9F3C56D7F7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D26373-99CE-4961-A869-9F3C56D7F7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9D26373-99CE-4961-A869-9F3C56D7F7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,5 +221,6 @@ Global
 		{7A640C78-320A-43EF-898E-711808D50449} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
 		{FB1DDFD2-3366-45E9-9819-DFD01FEEB754} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
 		{A9D26373-99CE-4961-A869-9F3C56D7F7A1} = {99901616-CB85-4245-BAF5-7E6AA5256631}
+		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045} = {AE0926F9-A54D-4F03-8835-736F64C3FC94}
 	EndGlobalSection
 EndGlobal
