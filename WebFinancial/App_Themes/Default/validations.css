@@ -1,0 +1,8 @@
+﻿body {
+}
+
+/********** DATA FORMATS **********/
+.integer, .unsigned-integer, .numeric, .unsigned-numeric, .currency, .unsigned-currency { text-align: right; }
+.missing-field { border-color: Red; border-width: 1px; border-style: solid; }
+.invalid-field, .invalid-equality, .invalid-custom { color: Red; }
+

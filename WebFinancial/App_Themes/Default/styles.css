@@ -1,0 +1,460 @@
+﻿.overlay {
+    background-image: url('images/overlay.png');
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    z-index: 200;
+}
+
+/* BUTTONS */
+input[type=button], input[type=submit] {
+    border: 1px solid;
+    margin: 0px 0px 0px 3px;
+    min-width: 80px;
+    min-height: 23px;
+    behavior: url('scripts/border-radius.htc');
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+}
+
+    input[type=button].default, input[type=submit].default {
+        outline: #3cd6fd solid 1px;
+    }
+
+input[disabled] {
+    border-color: Gray;
+}
+
+/* MESSAGE WINDOWS */
+
+.messagesTable {
+    position: absolute;
+    top: -95px;
+    left: -225px;
+    width: 450px;
+    height: 190px;
+    border-top: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;
+    border-right: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+    border-spacing: 0px;
+}
+
+    .messagesTable td {
+        padding: 5px 10px 5px 10px;
+    }
+
+    .messagesTable .caption {
+        background-color: #4b6c9e;
+        color: White;
+        text-align: left;
+        height: 18px;
+    }
+
+    .messagesTable .icon {
+        background-color: White;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .messagesTable .text {
+        background-color: White;
+        color: Black;
+        text-align: left;
+        width: 100%;
+    }
+
+    .messagesTable .buttonsBar {
+        text-align: right;
+        height: 1px;
+        padding: 6px 10px;
+    }
+
+div[id=messageAsteriskIcon] {
+    background-image: url('images/asterisk.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageErrorIcon] {
+    background-image: url('images/error.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageExclamationIcon] {
+    background-image: url('images/exclamation.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageHandIcon] {
+    background-image: url('images/hand.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageInformationIcon] {
+    background-image: url('images/information.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageQuestionIcon] {
+    background-image: url('images/question.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageStopIcon] {
+    background-image: url('images/stop.png');
+    width: 32px;
+    height: 32px;
+}
+
+div[id=messageWarningIcon] {
+    background-image: url('images/warning.png');
+    width: 32px;
+    height: 32px;
+}
+
+/* MESSAGE ZONE */
+
+.message-zone {
+    border: 1px solid #E9E9E9;
+    padding: 1px 5px 1px 25px;
+}
+
+    .message-zone.error {
+        background: #FFD7D7 url('images/message-zone-error.png') no-repeat 5px 2px;
+    }
+
+    .message-zone.warning {
+        background: #F9F3E3 url('images/message-zone-warning.png') no-repeat 5px 2px;
+    }
+
+    .message-zone.information {
+        background: #DAEAF4 url('images/message-zone-info.png') no-repeat 5px 2px;
+    }
+
+/* TOOLTIPS */
+
+.toolTip {
+    position: absolute;
+    min-width: 50px;
+    max-width: 200px;
+    vertical-align: middle;
+}
+
+    .toolTip .text {
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: 1px solid #C7BF93;
+        color: #000;
+        background-color: #FFF9C9;
+        padding: 6px 8px;
+        text-align: left;
+        font-size: smaller;
+    }
+
+    .toolTip.left .text {
+        margin-right: 5px;
+    }
+
+    .toolTip.right .text {
+        margin-left: 5px;
+    }
+
+    .toolTip.top .text {
+        margin-bottom: 7px;
+    }
+
+    .toolTip.bottom .text {
+        margin-top: 5px;
+    }
+
+    .toolTip .pointer {
+        background: url('images/tooltip-arrows.gif') no-repeat;
+        float: left;
+        position: absolute;
+    }
+
+    .toolTip.left .pointer {
+        background-position: -9px;
+        top: 0px;
+        bottom: 0px;
+        width: 6px;
+        right: 0px;
+    }
+
+    .toolTip.right .pointer {
+        background-position: -27px;
+        top: 0px;
+        bottom: 0px;
+        width: 6px;
+    }
+
+    .toolTip.top .pointer {
+        background-position: -18px;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -4px;
+        width: 9px;
+        height: 8px;
+    }
+
+    .toolTip.bottom .pointer {
+        top: 0px;
+        left: 50%;
+        margin-left: -4px;
+        width: 9px;
+        height: 8px;
+    }
+
+/* HELP SECTION */
+
+.helpWindow {
+    position: absolute;
+    top: -240px;
+    left: -330px;
+    width: 640px;
+    height: 480px;
+    background-color: #F9F3E3;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 20px 0px 20px 20px;
+}
+
+    .helpWindow .close-flyout {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: url('images/help-close.png') no-repeat;
+        top: 4px;
+        right: 3px;
+    }
+
+    .helpWindow .content {
+        position: relative;
+        text-align: justify;
+        overflow-y: auto;
+        padding-right: 20px;
+        height: 100%;
+    }
+
+/* VERTICAL MENU */
+
+/*.vertical-menu { background-color: #003040; position: absolute; width: 200px; margin: 0px; padding: 0px; font-size: 1.0em; }
+.vertical-menu ul { margin: 0px; padding: 0px; }
+.vertical-menu ul ul { padding: 0px 0px 0px 10px; }
+.vertical-menu li { list-style-type: none; }
+.vertical-menu a { color: #ffffff !important; text-decoration: none; }
+.vertical-menu a:hover { color: #cccccc !important; text-decoration: none; }
+.vertical-menu div { background-color: transparent; color: #ffffff; }
+.vertical-menu div.menu-item { padding: 3px 0px 3px 10px; }
+.vertical-menu div.menu-header { padding: 3px 0px 3px 10px; text-transform: uppercase; }
+.vertical-menu div.menu-header:hover { cursor: pointer; }
+.vertical-menu div.menu-header+ul { background-color: gray; }
+.vertical-menu div[icon] { padding-left: 30px; background: url('images/default-menu-icon.png') no-repeat; background-position: 10px center; }*/
+
+/* MASTER SECTIONS */
+
+h1 {
+    font-size: 1.6em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+}
+
+.page {
+    width: 960px;
+    background-color: silver;
+    margin: 20px auto 0px auto;
+    border: 1px solid #496077;
+}
+
+.header {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: #4b6c9e;
+    width: 100%;
+}
+
+    .header h1 {
+        font-weight: 700;
+        padding-left: 20px;
+        color: #f9f9f9;
+        border: none;
+        line-height: 2em;
+        font-size: 2em;
+    }
+
+.title {
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.main {
+    position: relative;
+    padding: 12px;
+    margin: 0px;
+    min-height: 420px;
+    left: 200px;
+    width: 736px;
+    background-color: White;
+}
+
+/* FORM CONTENTS */
+
+h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin: 0px 0px 10px 0px;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+.label {
+    float: right;
+    text-align: right;
+}
+
+/* DEFAULTS
+----------------------------------------------------------*/
+
+body {
+    font-size: 12px;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+a {
+    cursor: pointer;
+}
+
+    a:link, a:visited {
+        color: #034af3;
+    }
+
+    a:hover {
+        color: #1d60ff;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: #034af3;
+    }
+
+p {
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2 {
+    margin-top: 0px;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.leftCol {
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset {
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+    fieldset p {
+        margin: 2px 12px 10px 10px;
+    }
+
+    fieldset.login label, fieldset.register label, fieldset.changePassword label {
+        display: block;
+    }
+
+    fieldset label.inline {
+        display: inline;
+    }
+
+legend {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry {
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry {
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo {
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.failureNotification {
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.submitButton {
+    text-align: right;
+    padding-right: 10px;
+}
