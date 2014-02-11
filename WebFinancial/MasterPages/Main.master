@@ -10,8 +10,7 @@
         <asp:Literal runat="server" Text="<%$Resources: WebUILabels, ApplicationName%>" /></title>
 
     <asp:ContentPlaceHolder ID="MasterHeadContent" runat="server" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <webopt:bundlereference runat="server" path="~/Content/css" />
 </head>
 <body role="document">
     <div role="main" class="container">
