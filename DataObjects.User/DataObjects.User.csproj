@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BEA4894F-6661-4352-9BC2-63AE1094575D}</ProjectGuid>
+    <ProjectGuid>{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shared.IoC</RootNamespace>
-    <AssemblyName>Shared.IoC</AssemblyName>
+    <RootNamespace>DataObjects.User</RootNamespace>
+    <AssemblyName>DataObjects.User</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -33,11 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StructureMap">
-      <HintPath>..\References\StructureMap\StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,34 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BootStrapper.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Adapters.DataAccess.SQL.Menu\Adapters.DataAccess.SQL.Menu.csproj">
-      <Project>{CC6BAED2-307E-4730-81FA-EEBB0209F27D}</Project>
-      <Name>Adapters.DataAccess.SQL.Menu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.DataAccess.SQL.Security\Adapters.DataAccess.SQL.Security.csproj">
-      <Project>{3DB0F14C-B509-4730-B069-EA475B0DC7E7}</Project>
-      <Name>Adapters.DataAccess.SQL.Security</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.DataAccess.Web.Commons\Adapters.DataAccess.Web.Commons.csproj">
-      <Project>{A745769E-618E-44A5-93D1-AABF06D7BED7}</Project>
-      <Name>Adapters.DataAccess.Web.Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.Interfaces.Commons\Adapters.Interfaces.Commons.csproj">
-      <Project>{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}</Project>
-      <Name>Adapters.Interfaces.Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.Interfaces.Menu\Adapters.Interfaces.Menu.csproj">
-      <Project>{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}</Project>
-      <Name>Adapters.Interfaces.Menu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.Interfaces.Security\Adapters.Interfaces.Security.csproj">
-      <Project>{7A640C78-320A-43EF-898E-711808D50449}</Project>
-      <Name>Adapters.Interfaces.Security</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
