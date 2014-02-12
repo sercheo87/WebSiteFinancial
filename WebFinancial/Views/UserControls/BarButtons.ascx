@@ -3,7 +3,7 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="col-lg-4 col-lg-offset-4">
+        <div class="text-center">
             <asp:Button runat="server" ID="btAccept" Text="Acceptar" type="button" class="btn btn-success actionButton" />
             <asp:Button runat="server" ID="btCancel" Text="Cancelar" type="button" class="btn btn-danger actionButton" />
             <asp:Button runat="server" ID="btBack" Text="Retroceder" type="button" class="btn btn-default actionButton" />
