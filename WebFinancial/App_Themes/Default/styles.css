@@ -353,16 +353,16 @@ a {
 }
 
     a:link, a:visited {
-        color: #034af3;
+        color: #696969;
     }
 
     a:hover {
-        color: #1d60ff;
+        color: #696969;
         text-decoration: none;
     }
 
     a:active {
-        color: #034af3;
+        color: #696969;
     }
 
 p {

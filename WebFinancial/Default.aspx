@@ -37,7 +37,9 @@
         </div>
     </div>--%>
 
-    <uc:GridControl ID="grProducts" runat="server" />
+    <uc:GridControl ID="grProducts" runat="server" TypeSelected="Cheked" idCode="Account" idSelection="Selected" />
+
+    <asp:Label runat="server" ID="msg"></asp:Label>
     <asp:Button ID="Button1" runat="server" Text="Button" />
 </asp:Content>
 
