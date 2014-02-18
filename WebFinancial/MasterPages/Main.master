@@ -14,7 +14,7 @@
 </head>
 <body role="document">
     <div role="main" class="container">
-        <form runat="server">
+        <form id="frmForm" runat="server">
             <asp:ScriptManager ID="scriptManager" runat="server">
                 <Scripts>
                     <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>

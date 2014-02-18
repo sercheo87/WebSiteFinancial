@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -81,15 +84,6 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     #region Binding Data
     private void BindData()
     {
-        DataTable dt = new DataTable();
-        CheckBoxField chkField = new CheckBoxField();
-        chkField.DataField = idSelection;
-        chkField.ReadOnly = false;
-        chkField.ControlStyle.CssClass = "checkbox-inline";
-
-        gvGrid.DataSource = DataCollection;
-        gvGrid.DataBind();
-        gvGrid.HeaderRow.TableSection = TableRowSection.TableHeader;
     }
 
     //Convert List To DataTable.
@@ -125,11 +119,6 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     }
     private void Format()
     {
-        gvGrid.CssClass = "table table-striped table-hover";
-        gvGrid.RowStyle.CssClass = "";
-        gvGrid.AlternatingRowStyle.CssClass = "";
-        gvGrid.HeaderStyle.CssClass = "";
-        gvGrid.UseAccessibleHeader = true;
     }
     #endregion
 
@@ -155,6 +144,69 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     #endregion
 
     #region "Events Grid"
+
+    protected void gvGrid_PreRender(object sender, EventArgs e)
+    {
+        base.OnPreRender(e);
+        DataTable dt = new DataTable();
+        CheckBoxField chkField = new CheckBoxField();
+        chkField.DataField = idSelection;
+        chkField.ReadOnly = false;
+        chkField.ControlStyle.CssClass = "checkbox-inline";
+
+        gvGrid.AllowPaging = true;
+        gvGrid.AllowSorting = true;
+        gvGrid.AutoGenerateColumns = true;
+        gvGrid.AutoGenerateSelectButton = false;
+        gvGrid.AllowCustomPaging = false;
+        gvGrid.ShowFooter = false;
+        gvGrid.ShowHeader = true;
+        gvGrid.PageSize = 5;
+
+        gvGrid.PagerStyle.CssClass = "paginator-toolbar";
+        gvGrid.PagerSettings.Mode = PagerButtons.NextPreviousFirstLast;
+        gvGrid.PagerSettings.Position = PagerPosition.Bottom;
+
+        gvGrid.GridLines = GridLines.None;
+
+        gvGrid.DataSource = DataCollection;
+        gvGrid.DataBind();
+
+        gvGrid.UseAccessibleHeader = true;
+        gvGrid.HeaderRow.TableSection = TableRowSection.TableHeader;
+        if (gvGrid.ShowFooter)
+        {
+            gvGrid.FooterRow.TableSection = TableRowSection.TableHeader;
+        }
+
+        gvGrid.CssClass = "table table-bordered table-striped table-condensed cf table-hover";
+        gvGrid.RowStyle.CssClass = "";
+        gvGrid.AlternatingRowStyle.CssClass = "";
+        gvGrid.HeaderStyle.CssClass = "";
+    }
+
+    protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.Cells[0].GetType() == typeof(System.Web.UI.WebControls.DataControlFieldCell))
+            {
+                TableCell tc = e.Row.Cells[1];
+
+                if (tc.Controls.Count > 0)
+                {
+                    LinkButton btEdit = (LinkButton)tc.FindControl("EditButton");
+                    LinkButton btDelete = (LinkButton)tc.FindControl("DeleteButton");
+                    LinkButton btDetail = (LinkButton)tc.FindControl("DetailButton");
+
+                    btEdit.CommandArgument = e.Row.Cells[2].Text;
+                    btDelete.CommandArgument = e.Row.Cells[2].Text;
+                    btDetail.CommandArgument = e.Row.Cells[2].Text;
+                }
+            }
+        }
+    }
+
     protected void PageDropDownList_SelectedIndexChanged(Object sender, EventArgs e)
     {
         GridViewRow pagerRow = gvGrid.BottomPagerRow;
@@ -203,7 +255,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     }
     #endregion
 
-    #region "Sorting Dynamic Reflection"
+    #region Sorting Dynamic Reflection
     private static List<T> DynamicSort1<T>(List<T> genericList, string sortExpression, string sortDirection)
     {
         int sortReverser = sortDirection.ToLower().StartsWith("asc") ? 1 : -1;
@@ -225,6 +277,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
 
         return genericList;
     }
+
     private static MethodInfo GetCompareToMethod<T>(T genericInstance, string sortExpression)
     {
         Type genericType = genericInstance.GetType();
@@ -234,27 +287,6 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         return compareToMethodOfSortExpressionType;
     }
     #endregion
-    protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            if (e.Row.Cells[0].GetType() == typeof(System.Web.UI.WebControls.DataControlFieldCell))
-            {
-                TableCell tc = e.Row.Cells[1];
-
-                if (tc.Controls.Count > 0)
-                {
-                    LinkButton btEdit = (LinkButton)tc.FindControl("EditButton");
-                    LinkButton btDelete = (LinkButton)tc.FindControl("DeleteButton");
-                    LinkButton btDetail = (LinkButton)tc.FindControl("DetailButton");
-
-                    btEdit.CommandArgument = e.Row.Cells[2].Text;
-                    btDelete.CommandArgument = e.Row.Cells[2].Text;
-                    btDetail.CommandArgument = e.Row.Cells[2].Text;
-                }
-            }
-        }
-    }
 
     #region Toolbar
     protected void btSelectAll_Click(object sender, EventArgs e)
@@ -265,6 +297,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
             obj.Checked = true;
         }
     }
+
     protected void btDeleteAll_Click(object sender, EventArgs e)
     {
         GridEventArgs args = new GridEventArgs();
@@ -288,6 +321,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         }
         Grid_Events(sender, args);
     }
+
     public IDictionary<string, object> GetValues(GridViewRow row)
     {
         IOrderedDictionary dictionary = new OrderedDictionary();
@@ -316,15 +350,255 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     #region Exports
     protected void btExportXml_Click(object sender, EventArgs e)
     {
-
+        //Export the GridView to Excel
+        PrepareGridViewForExport(gvGrid);
+        ExportGridViewExcel();
     }
+
+    protected void btExportWord_Click(object sender, EventArgs e)
+    {
+        PrepareGridViewForExport(gvGrid);
+        ExportGridViewWord();
+    }
+
     protected void btExportPdf_Click(object sender, EventArgs e)
     {
-
+        PrepareGridViewForExport(gvGrid);
+        ExportGridViewPdf();
     }
-    protected void btExportTxt_Click(object sender, EventArgs e)
-    {
 
+    protected void btExportCsv_Click(object sender, EventArgs e)
+    {
+        PrepareGridViewForExport(gvGrid);
+        ExportGridViewCsv();
     }
     #endregion
+
+    #region Methods Export
+    private void PrepareGridViewForExport(Control gv)
+    {
+        LinkButton lb = new LinkButton();
+        Literal l = new Literal();
+        string name = String.Empty;
+        for (int i = 0; i < gv.Controls.Count; i++)
+        {
+            if (gv.Controls[i].GetType() == typeof(LinkButton))
+            {
+                l.Text = (gv.Controls[i] as LinkButton).Text;
+                gv.Controls.Remove(gv.Controls[i]);
+                gv.Controls.AddAt(i, l);
+            }
+            else if (gv.Controls[i].GetType() == typeof(DropDownList))
+            {
+                l.Text = (gv.Controls[i] as DropDownList).SelectedItem.Text;
+                gv.Controls.Remove(gv.Controls[i]);
+                gv.Controls.AddAt(i, l);
+            }
+            else if (gv.Controls[i].GetType() == typeof(CheckBox))
+            {
+                l.Text = (gv.Controls[i] as CheckBox).Checked ? "True" : "False";
+                gv.Controls.Remove(gv.Controls[i]);
+                gv.Controls.AddAt(i, l);
+            }
+            if (gv.Controls[i].HasControls())
+            {
+                PrepareGridViewForExport(gv.Controls[i]);
+            }
+        }
+    }
+
+    private void ExportGridViewExcel()
+    {
+        StringBuilder sb = new StringBuilder();
+        StringWriter sw = new StringWriter(sb);
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        Page page = new Page();
+        HtmlForm form = new HtmlForm();
+
+        gvGrid.AllowPaging = false;
+        gvGrid.DataSource = dataCollection;
+        gvGrid.DataBind();
+        page.EnableEventValidation = false;
+
+        gvGrid.Columns[0].Visible = false;
+        gvGrid.Columns[1].Visible = false;
+
+        page.DesignerInitialize();
+        page.Controls.Add(form);
+        form.Controls.Add(gvGrid);
+
+        page.RenderControl(htw);
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.AddHeader("Content-Disposition", "attachment;filename=nombreDocumento.xls");
+        Response.Charset = "UTF-8";
+
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentEncoding = System.Text.Encoding.Default;
+
+        Response.Write(sb.ToString());
+        Response.End();
+
+
+        gvGrid.Columns[0].Visible = true;
+        gvGrid.Columns[1].Visible = true;
+
+        gvGrid.AllowPaging = true;
+        gvGrid.DataBind();
+    }
+
+    private void ExportGridViewWord()
+    {
+        StringBuilder sb = new StringBuilder();
+        StringWriter sw = new StringWriter(sb);
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        Page page = new Page();
+        HtmlForm form = new HtmlForm();
+
+        gvGrid.AllowPaging = false;
+        gvGrid.DataSource = dataCollection;
+        gvGrid.DataBind();
+        page.EnableEventValidation = false;
+
+        gvGrid.Columns[0].Visible = false;
+        gvGrid.Columns[1].Visible = false;
+
+        page.DesignerInitialize();
+        page.Controls.Add(form);
+        form.Controls.Add(gvGrid);
+
+        page.RenderControl(htw);
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ContentType = "application/vnd.ms-word";
+        Response.AddHeader("Content-Disposition", "attachment;filename=nombreDocumento.doc");
+        Response.Charset = "UTF-8";
+
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentEncoding = System.Text.Encoding.Default;
+
+        Response.Write(sb.ToString());
+        Response.End();
+
+
+        gvGrid.Columns[0].Visible = true;
+        gvGrid.Columns[1].Visible = true;
+
+        gvGrid.AllowPaging = true;
+        gvGrid.DataBind();
+    }
+
+    private void ExportGridViewPdf()
+    {
+        StringBuilder sb = new StringBuilder();
+        StringWriter sw = new StringWriter(sb);
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        Page page = new Page();
+        HtmlForm form = new HtmlForm();
+        gvGrid.AllowSorting = false;
+        gvGrid.AllowPaging = false;
+        gvGrid.DataSource = dataCollection;
+        gvGrid.DataBind();
+        page.EnableEventValidation = false;
+
+        gvGrid.Columns[0].Visible = false;
+        gvGrid.Columns[1].Visible = false;
+
+        page.DesignerInitialize();
+        page.Controls.Add(form);
+        form.Controls.Add(gvGrid);
+
+        page.RenderControl(htw);
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ContentType = "application/pdf";
+        Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.pdf");
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentEncoding = System.Text.Encoding.Default;
+
+
+        StringReader sr = new StringReader(sw.ToString());
+        iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 10f, 10f, 10f, 0f);
+        iTextSharp.text.html.simpleparser.HTMLWorker htmlparser = new iTextSharp.text.html.simpleparser.HTMLWorker(pdfDoc);
+        iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+        pdfDoc.Open();
+        htmlparser.Parse(sr);
+        pdfDoc.Close();
+        Response.Write(pdfDoc);
+        Response.End();
+
+
+        gvGrid.Columns[0].Visible = true;
+        gvGrid.Columns[1].Visible = true;
+
+        gvGrid.AllowSorting = true;
+        gvGrid.AllowPaging = true;
+        gvGrid.DataBind();
+    }
+
+    private void ExportGridViewCsv()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        Page page = new Page();
+        HtmlForm form = new HtmlForm();
+        gvGrid.AllowSorting = false;
+        gvGrid.AllowPaging = false;
+        gvGrid.DataSource = dataCollection;
+        gvGrid.DataBind();
+        page.EnableEventValidation = false;
+
+        gvGrid.Columns[0].Visible = false;
+        gvGrid.Columns[1].Visible = false;
+
+        page.DesignerInitialize();
+        page.Controls.Add(form);
+        form.Controls.Add(gvGrid);
+
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ContentType = "application/text";
+        Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.csv");
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentEncoding = System.Text.Encoding.Default;
+        sb = new StringBuilder();
+        for (int k = 0; k < gvGrid.Columns.Count; k++)
+        {
+            //add separator
+            sb.Append(gvGrid.Columns[k].HeaderText + ',');
+        }
+        //append new line
+        sb.Append("\r\n");
+        for (int i = 0; i < gvGrid.Rows.Count; i++)
+        {
+            for (int k = 0; k < gvGrid.Columns.Count; k++)
+            {
+                //add separator
+                sb.Append(gvGrid.Rows[i].Cells[k].Text + ',');
+            }
+            //append new line
+            sb.Append("\r\n");
+        }
+        StringWriter sw = new StringWriter(sb);
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        page.RenderControl(htw);
+        Response.Output.Write(sb.ToString());
+        Response.End();
+
+
+        gvGrid.Columns[0].Visible = true;
+        gvGrid.Columns[1].Visible = true;
+
+        gvGrid.AllowSorting = true;
+        gvGrid.AllowPaging = true;
+        gvGrid.DataBind();
+    }
+    #endregion
+
+
 }
