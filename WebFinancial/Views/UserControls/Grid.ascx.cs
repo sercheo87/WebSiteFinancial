@@ -86,7 +86,6 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     {
     }
 
-    //Convert List To DataTable.
     static DataTable ListToDataTable<T>(IEnumerable<T> list)
     {
         var dt = new DataTable();
@@ -117,12 +116,13 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         }
         return dt;
     }
+
     private void Format()
     {
     }
     #endregion
 
-    #region "Mothods Forms"
+    #region Methods Forms
     public void Refresh()
     {
         Format();
@@ -135,15 +135,26 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     {
         if (!IsPostBack)
         {
+
         }
+        FillFilterOptions();
     }
+
     protected override void OnInit(EventArgs e)
     {
         base.OnInit(e);
     }
+
+    protected void Page_PreRender(object sender, EventArgs e)
+    {
+    }
+
+    protected void Page_Init(object sender, EventArgs e)
+    {
+    }
     #endregion
 
-    #region "Events Grid"
+    #region Events Grid
 
     protected void gvGrid_PreRender(object sender, EventArgs e)
     {
@@ -154,11 +165,11 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         chkField.ReadOnly = false;
         chkField.ControlStyle.CssClass = "checkbox-inline";
 
-        gvGrid.AllowPaging = true;
+        gvGrid.AllowPaging = false;
         gvGrid.AllowSorting = true;
         gvGrid.AutoGenerateColumns = true;
         gvGrid.AutoGenerateSelectButton = false;
-        gvGrid.AllowCustomPaging = false;
+        gvGrid.AllowCustomPaging = true;
         gvGrid.ShowFooter = false;
         gvGrid.ShowHeader = true;
         gvGrid.PageSize = 5;
@@ -176,13 +187,14 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         gvGrid.HeaderRow.TableSection = TableRowSection.TableHeader;
         if (gvGrid.ShowFooter)
         {
-            gvGrid.FooterRow.TableSection = TableRowSection.TableHeader;
+            gvGrid.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         gvGrid.CssClass = "table table-bordered table-striped table-condensed cf table-hover";
         gvGrid.RowStyle.CssClass = "";
         gvGrid.AlternatingRowStyle.CssClass = "";
         gvGrid.HeaderStyle.CssClass = "";
+
     }
 
     protected void gvGrid_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -214,40 +226,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         gvGrid.PageIndex = pageList.SelectedIndex;
         BindData();
     }
-    protected void CustomersGridView_DataBound(Object sender, EventArgs e)
-    {
-        GridViewRow pagerRow = gvGrid.BottomPagerRow;
-        DropDownList pageList = (DropDownList)pagerRow.Cells[0].FindControl("PageDropDownList");
-        Literal pageLabel = (Literal)pagerRow.Cells[0].FindControl("CurrentPageLabel");
-        Literal TotalLabel = (Literal)pagerRow.Cells[0].FindControl("TotalPageLabel");
 
-        if (pageList != null)
-        {
-            for (int i = 0; i < gvGrid.PageCount; i++)
-            {
-                int pageNumber = i + 1;
-                ListItem item = new ListItem(pageNumber.ToString());
-                if (i == gvGrid.PageIndex)
-                {
-                    item.Selected = true;
-                }
-                pageList.Items.Add(item);
-            }
-        }
-
-        if (pageLabel != null)
-        {
-            int currentPage = gvGrid.PageIndex + 1;
-            pageLabel.Text = currentPage.ToString();
-            TotalLabel.Text = gvGrid.PageCount.ToString();
-
-        }
-
-    }
-    protected void gvGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        gvGrid.PageIndex = e.NewPageIndex;
-    }
     protected void gvGrid_Sorting(object sender, GridViewSortEventArgs e)
     {
         DataCollection = DynamicSort1<object>(DataCollection, e.SortExpression, e.SortDirection.ToString());
@@ -320,6 +299,11 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
             }
         }
         Grid_Events(sender, args);
+    }
+
+    protected void btPrint_Click(object sender, EventArgs e)
+    {
+
     }
 
     public IDictionary<string, object> GetValues(GridViewRow row)
@@ -600,5 +584,43 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     }
     #endregion
 
+    #region Filter Option
+    private void FillFilterOptions()
+    {
+        HtmlGenericControl ul = new HtmlGenericControl("ul");
+        ul.Attributes.Add("class", "dropdown-menu");
 
+        foreach (Object item in DataCollection)
+        {
+            var props = item.GetType().GetProperties();
+            foreach (var prop in props)
+            {
+                string nameRow = prop.Name;
+                string valueRow = prop.GetValue(item, null).ToString();
+
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                LinkButton lbColFilter = new LinkButton();
+                lbColFilter.Click += new EventHandler(filterEvent_Click); ;
+                lbColFilter.CommandArgument = nameRow;
+                lbColFilter.Command += new CommandEventHandler(filterEvent_Command);
+                lbColFilter.Text = nameRow;
+                lbColFilter.CausesValidation = false;
+                li.Controls.Add(lbColFilter);
+                ul.Controls.Add(li);
+            }
+            break;
+        }
+
+        pnlFilter.Controls.Add(ul);
+    }
+
+    protected void filterEvent_Command(object sender, CommandEventArgs e)
+    {
+        LinkButton x = (LinkButton)sender;
+        btFilterTagBy.Text = String.Concat("Filter By: ", x.CommandArgument," <span class='caret'></span>");
+    }
+    protected void filterEvent_Click(object sender, EventArgs e)
+    {
+    }
+    #endregion
 }

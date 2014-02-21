@@ -124,7 +124,7 @@
     <value>Accept</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>My ASP.NET Application</value>
+    <value>Financy Corp</value>
     <comment>Put application name here</comment>
   </data>
   <data name="Cancel" xml:space="preserve">

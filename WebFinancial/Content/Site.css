@@ -1,5 +1,9 @@
-﻿@media only screen and (max-width: 800px) {
-    #flip-scroll .cf:after {
+﻿.flip-scroll table {
+    margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 800px) {
+    .flip-scroll .cf:after {
         visibility: hidden;
         display: block;
         font-size: 0;
@@ -8,41 +12,41 @@
         height: 0;
     }
 
-    #flip-scroll * html .cf {
+    .flip-scroll * html .cf {
         zoom: 1;
     }
 
-    #flip-scroll *:first-child + html .cf {
+    .flip-scroll *:first-child + html .cf {
         zoom: 1;
     }
 
-    #flip-scroll table {
+    .flip-scroll table {
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
     }
 
-    #flip-scroll th, #flip-scroll td {
+    .flip-scroll th, .flip-scroll td {
         margin: 0;
         vertical-align: top;
     }
 
-    #flip-scroll th {
+    .flip-scroll th {
         text-align: left;
     }
 
-    #flip-scroll table {
+    .flip-scroll table {
         display: block;
         position: relative;
         width: 100%;
     }
 
-    #flip-scroll thead {
+    .flip-scroll thead {
         display: block;
         float: left;
     }
 
-    #flip-scroll tbody {
+    .flip-scroll tbody {
         display: block;
         width: auto;
         position: relative;
@@ -50,59 +54,52 @@
         white-space: nowrap;
     }
 
-    #flip-scroll thead tr {
+    .flip-scroll thead tr {
         display: block;
     }
 
-        #flip-scroll thead tr th {
+        .flip-scroll thead tr th {
             height: 30px;
         }
 
-    #flip-scroll th {
+    .flip-scroll th {
         display: block;
         text-align: right;
     }
 
-    #flip-scroll tbody tr {
+    .flip-scroll tbody tr {
         display: inline-block;
         vertical-align: top;
     }
 
-    #flip-scroll td {
+    .flip-scroll td {
         display: block;
         min-height: 1.25em;
         text-align: left;
     }
     /* sort out borders */
-    #flip-scroll th {
+    .flip-scroll th {
         border-bottom: 0;
         border-left: 0;
     }
 
-    #flip-scroll td {
+    .flip-scroll td {
         border-left: 0;
         border-right: 0;
         border-bottom: 0;
     }
 
-    #flip-scroll tbody tr {
+    .flip-scroll tbody tr {
         border-left: 1px solid #babcbf;
     }
         /*Action*/
-        #flip-scroll tbody tr td a.btn {
+        .flip-scroll tbody tr td a.btn {
         }
         /*Selection*/
-        #flip-scroll tbody tr td span.checkbox-inline {
-        }
-        /*Pagination*/
-        #flip-scroll tbody tr td div.pagination {
+        .flip-scroll tbody tr td span.checkbox-inline {
         }
 
-    #flip-scroll .paginator-toolbar {
-        display:block;
-    }
-
-    #flip-scroll th:last-child, #flip-scroll td:last-child {
+    .flip-scroll th:last-child, .flip-scroll td:last-child {
         border-bottom: 1px solid #babcbf;
     }
 }

@@ -8,42 +8,62 @@
 
 <asp:UpdatePanel ID="upGrid" runat="server" ClientIDMode="Static" UpdateMode="Conditional">
     <ContentTemplate>
-        <div class="row">
-            <asp:Panel ID="pnlToolbar" runat="server" CssClass="col-md-12">
-                <div class="btn-group btn-group-sm">
-                    <asp:LinkButton runat="server" ID="btSelectAll" CssClass="btn btn-default" OnClick="btSelectAll_Click"><i class="fa fa-check-square"></i> Select All</asp:LinkButton>
-                    <asp:LinkButton runat="server" ID="btDeleteAll" CssClass="btn btn-default" OnClick="btDeleteAll_Click"><i class="fa fa-eraser"></i> Delete</asp:LinkButton>
-                </div>
-
-                <div class="btn-group btn-group-sm pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file"></i>Export <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <asp:LinkButton runat="server" ID="btExportXml" OnClick="btExportXml_Click">Xml</asp:LinkButton>
-                        </li>
-                        <li>
-                            <asp:LinkButton runat="server" ID="btExportPdf" OnClick="btExportPdf_Click">Pdf</asp:LinkButton>
-                        </li>
-                        <li>
-                            <asp:LinkButton runat="server" ID="btExportWord" OnClick="btExportWord_Click">Word</asp:LinkButton>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <asp:LinkButton runat="server" ID="btExportCsv" OnClick="btExportCsv_Click">Csv</asp:LinkButton>
-                        </li>
-                    </ul>
+        <div class="panel panel-default">
+            <asp:Panel ID="pnlToolbar" runat="server" CssClass="panel-heading">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="input-group input-group-sm">
+                                        <%-- Filter Panel  --%>
+                                        <asp:Panel runat="server" ID="pnlFilter" ClientIDMode="Static" CssClass="input-group-btn">
+                                            <asp:LinkButton runat="server" ID="btFilterTagBy" CssClass="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filter by <span class="caret"></span></asp:LinkButton>
+                                        </asp:Panel>
+                                        <asp:TextBox runat="server" ID="txFilter" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="Filter"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="form-group btn-group-sm">
+                                    <label class="" for="ddPagesSizes">Items por Page: </label>
+                                    <asp:DropDownList runat="server" ID="ddPagesSizes" CssClass="btn" dropdown-toggle ClientIDMode="Static">
+                                        <asp:ListItem Selected="True">5</asp:ListItem>
+                                        <asp:ListItem>10</asp:ListItem>
+                                        <asp:ListItem>25</asp:ListItem>
+                                        <asp:ListItem>50</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="btn-group btn-group-sm pull-right">
+                                    <asp:LinkButton runat="server" ID="btSelectAll" CssClass="btn btn-default" OnClick="btSelectAll_Click"><i class="fa fa-check-square"></i> Select All</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btDeleteAll" CssClass="btn btn-default" OnClick="btDeleteAll_Click"><i class="fa fa-eraser"></i> Delete</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btPrint" CssClass="btn btn-default" OnClick="btPrint_Click"><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file"></i>Export <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <asp:LinkButton runat="server" ID="btExportXml" OnClick="btExportXml_Click">Xml</asp:LinkButton>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton runat="server" ID="btExportPdf" OnClick="btExportPdf_Click">Pdf</asp:LinkButton>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton runat="server" ID="btExportWord" OnClick="btExportWord_Click">Word</asp:LinkButton>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <asp:LinkButton runat="server" ID="btExportCsv" OnClick="btExportCsv_Click">Csv</asp:LinkButton>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </asp:Panel>
-
-            <div id="flip-scroll" class="col-md-12">
+            <div class="flip-scroll">
                 <asp:GridView ID="gvGrid"
                     OnPreRender="gvGrid_PreRender"
                     ClientIDMode="Static"
-                    OnDataBound="CustomersGridView_DataBound"
                     OnRowDataBound="gvGrid_RowDataBound"
-                    OnPageIndexChanging="gvGrid_PageIndexChanging"
                     EmptyDataText="No data available."
-                    data-page-navigation="pagination"
                     OnSorting="gvGrid_Sorting"
                     CellPadding="5"
                     CellSpacing="0"
@@ -71,38 +91,19 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-
-                    <FooterStyle BackColor="LightCyan"
-                        ForeColor="MediumBlue" />
-                    <PagerTemplate>
-                        <div class="form-inline pagination" role="form">
-                            <div class="form-group">
-                                <asp:Label ID="MessageLabel"
-                                    CssClass="control-label"
-                                    Text="Select a page:"
-                                    runat="server" />
-                                <asp:DropDownList ID="PageDropDownList"
-                                    CssClass="form-control input-sm"
-                                    AutoPostBack="true"
-                                    OnSelectedIndexChanged="PageDropDownList_SelectedIndexChanged"
-                                    runat="server" />
-                            </div>
-                            <div class="form-group pull-right">
-                                <label>
-                                    Page 
-                            <span class="badge">
-                                <asp:Literal ID="CurrentPageLabel" runat="server"></asp:Literal>
-                            </span>
-                                    of 
-                            <span class="badge">
-                                <asp:Literal ID="TotalPageLabel" runat="server"></asp:Literal>
-                            </span>
-                                </label>
-                            </div>
-                        </div>
-                    </PagerTemplate>
                 </asp:GridView>
             </div>
+
+            <asp:Panel runat="server" ID="pnlPaginator" ClientIDMode="Static" CssClass="panel-footer">
+                <ul class="pager">
+                    <li class="previous">
+                        <asp:LinkButton runat="server" ID="btPrevios">&larr; Back</asp:LinkButton>
+                    </li>
+                    <li class="next">
+                        <asp:LinkButton runat="server" ID="btNext">Next &rarr;</asp:LinkButton>
+                    </li>
+                </ul>
+            </asp:Panel>
         </div>
     </ContentTemplate>
     <Triggers>
