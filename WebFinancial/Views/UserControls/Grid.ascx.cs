@@ -623,4 +623,11 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     {
     }
     #endregion
+
+    #region "Navigation Events"
+    protected void btNext_Click(object sender, EventArgs e)
+    {
+        System.Threading.Thread.Sleep(2000);
+    }
+    #endregion
 }
