@@ -1,10 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Grid.ascx.cs" Inherits="Views_UserControls_Grid" %>
-<script src="http://elvery.net/demo/responsive-tables/assets/js/prettify.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        prettyPrint();
-    });
-</script>
 
 <asp:UpdatePanel ID="upGrid" runat="server" ClientIDMode="Static" UpdateMode="Conditional">
     <ContentTemplate>
@@ -86,13 +80,14 @@
                             <HeaderTemplate>Actions</HeaderTemplate>
                             <ItemStyle />
                             <ItemTemplate>
-                                <asp:LinkButton ID="EditButton" CssClass="btn btn-default btn-xs" CommandName="Edit" runat="server"><i class="fa fa-edit"></i></asp:LinkButton>
-                                <asp:LinkButton ID="DeleteButton" CssClass="btn btn-danger btn-xs" CommandName="Delete" runat="server"><i class="fa fa-eraser"></i></asp:LinkButton>
-                                <asp:LinkButton ID="DetailButton" CssClass="btn btn-default btn-xs" CommandName="Detail" runat="server"><i class="fa fa-list-alt"></i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton1" CssClass="btn btn-default btn-xs" CommandName="Edit" runat="server"><i class="fa fa-book fa-lg"></i></asp:LinkButton>
+                                <asp:LinkButton ID="EditButton" CssClass="btn btn-default btn-xs" CommandName="EditInForm" runat="server"><i class="fa fa-edit fa-lg"></i></asp:LinkButton>
+                                <asp:LinkButton ID="DeleteButton" CssClass="btn btn-danger btn-xs" CommandName="Delete" runat="server"><i class="fa fa-eraser fa-lg"></i></asp:LinkButton>
+                                <asp:LinkButton ID="DetailButton" CssClass="btn btn-default btn-xs" CommandName="Detail" runat="server"><i class="fa fa-list-alt fa-lg"></i></asp:LinkButton>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:LinkButton ID="UpdateButton" runat="server" CssClass="btn btn-default btn-sm" CommandName="Update" Text="Update" />&nbsp;
-                                <asp:LinkButton ID="Cancel" runat="server" CssClass="btn btn-default btn-sm" CommandName="Cancel" Text="Cancel" />
+                                <asp:LinkButton ID="CancelButton" runat="server" CssClass="btn btn-default btn-sm" CommandName="Cancel" Text="Cancel" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -117,7 +112,6 @@
                 </ul>
             </asp:Panel>
         </div>
-
     </ContentTemplate>
     <Triggers>
         <asp:AsyncPostBackTrigger ControlID="btNext" EventName="Click" />

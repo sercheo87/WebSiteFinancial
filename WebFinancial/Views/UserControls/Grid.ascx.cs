@@ -169,6 +169,7 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         gvGrid.AllowSorting = true;
         gvGrid.AutoGenerateColumns = true;
         gvGrid.AutoGenerateSelectButton = false;
+        gvGrid.AutoGenerateEditButton = false;
         gvGrid.AllowCustomPaging = true;
         gvGrid.ShowFooter = false;
         gvGrid.ShowHeader = true;
@@ -178,8 +179,8 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
         gvGrid.PagerSettings.Mode = PagerButtons.NextPreviousFirstLast;
         gvGrid.PagerSettings.Position = PagerPosition.Bottom;
 
+        gvGrid.DataKeyNames = new String[] { idCode };
         gvGrid.GridLines = GridLines.None;
-
         gvGrid.DataSource = DataCollection;
         gvGrid.DataBind();
 
@@ -201,6 +202,14 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+            {
+                TableCell tc = e.Row.Cells[1];
+                LinkButton btUpdate = (LinkButton)tc.FindControl("UpdateButton");
+                LinkButton btCancel = (LinkButton)tc.FindControl("CancelButton");
+                if (btUpdate != null) btUpdate.CommandArgument = e.Row.Cells[2].Text;
+                if (btCancel != null) btCancel.CommandArgument = e.Row.Cells[2].Text;
+            }
             if (e.Row.Cells[0].GetType() == typeof(System.Web.UI.WebControls.DataControlFieldCell))
             {
                 TableCell tc = e.Row.Cells[1];
@@ -211,9 +220,9 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
                     LinkButton btDelete = (LinkButton)tc.FindControl("DeleteButton");
                     LinkButton btDetail = (LinkButton)tc.FindControl("DetailButton");
 
-                    btEdit.CommandArgument = e.Row.Cells[2].Text;
-                    btDelete.CommandArgument = e.Row.Cells[2].Text;
-                    btDetail.CommandArgument = e.Row.Cells[2].Text;
+                    if (btEdit!=null) btEdit.CommandArgument = e.Row.Cells[2].Text;
+                    if (btDelete != null) btDelete.CommandArgument = e.Row.Cells[2].Text;
+                    if (btDetail != null) btDetail.CommandArgument = e.Row.Cells[2].Text;
                 }
             }
         }
@@ -617,8 +626,9 @@ public partial class Views_UserControls_Grid : WebUserControl<object>
     protected void filterEvent_Command(object sender, CommandEventArgs e)
     {
         LinkButton x = (LinkButton)sender;
-        btFilterTagBy.Text = String.Concat("Filter By: ", x.CommandArgument," <span class='caret'></span>");
+        btFilterTagBy.Text = String.Concat("Filter By: ", x.CommandArgument, " <span class='caret'></span>");
     }
+
     protected void filterEvent_Click(object sender, EventArgs e)
     {
     }

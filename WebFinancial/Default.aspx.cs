@@ -22,15 +22,26 @@ public partial class Default : WebView<object>
         };
     protected void Page_Load(object sender, EventArgs e)
     {
+        BindData();
+    }
+
+    private void BindData()
+    {
         grProducts.Grid.RowDeleting += gvGrid_RowDeleting;
         grProducts.Grid.RowCommand += gvGrid_RowCommand;
+        grProducts.Grid.RowEditing += gvGrid_RowEditing;
+        grProducts.Grid.RowUpdating += gvGrid_RowUpdating;
+        grProducts.Grid.RowUpdated += gvGrid_RowUpdated;
+        grProducts.Grid.RowCancelingEdit += gvGrid_RowCancelingEdit;
+
         grProducts.DataCollection = DataCollection.ToList<object>();
         grProducts.Refresh();
         grProducts.Grid_Events += new GridEventHandler(this.Grid_Events);
     }
+
     private void Grid_Events(object sender, GridEventArgs e)
     {
-        
+
         string o = "";
     }
     #region "Event Commands Grid"
@@ -39,8 +50,10 @@ public partial class Default : WebView<object>
         switch (e.CommandName)
         {
             case "Edit":
+                msg.Text = "Edit gvGrid_RowCommand";
                 break;
             case "Update":
+                msg.Text = "Update gvGrid_RowCommand";
                 break;
             case "Delete":
                 Product obj = DataCollection.Where(x => x.Account == e.CommandArgument.ToString()).SingleOrDefault();
@@ -49,12 +62,24 @@ public partial class Default : WebView<object>
                 grProducts.Grid.DataBind();
                 break;
             case "Cancel":
+                msg.Text = "Cancel gvGrid_RowCommand";
                 break;
             case "Sort":
                 break;
             case "Select":
                 break;
             case "Page":
+                break;
+            case "EditInForm":
+            case "Detail":
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append(@"$(function() {");
+                sb.Append("$('#myModal').modal('show');");
+                sb.Append(@"});");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "EditModalScript", sb.ToString(), false);
+                mdlItem.Text = e.CommandArgument.ToString();
                 break;
         }
         if (e.CommandName == "AddToCart")
@@ -66,6 +91,8 @@ public partial class Default : WebView<object>
     protected void gvGrid_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         msg.Text = "gvGrid_RowCancelingEdit";
+        grProducts.Grid.EditIndex = -1;
+        updMessages.Update();
     }
 
     protected void gvGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -91,13 +118,19 @@ public partial class Default : WebView<object>
     {
         msg.Text = "gvGrid_RowDeleted";
     }
+
     protected void gvGrid_RowUpdated(object sender, GridViewUpdatedEventArgs e)
     {
         msg.Text = "gvGrid_RowUpdated";
+        BindData();
+        updMessages.Update();
     }
+    
     protected void gvGrid_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
         msg.Text = "gvGrid_RowUpdating";
+        grProducts.Grid.EditIndex = -1;
+        updMessages.Update();
     }
     #endregion
 }
