@@ -6,7 +6,7 @@
             <asp:Panel ID="pnlToolbar" runat="server" CssClass="panel-heading">
                 <div class="form-inline" role="form">
                     <div class="row">
-                        <asp:Panel ID="pnlToolExport" runat="server" CssClass="col-sm-4">
+                        <asp:Panel ID="pnlToolExport" runat="server" CssClass="col-sm-5">
                             <div class="form-group">
                                 <div class="btn-group btn-group-sm ">
                                     <asp:LinkButton runat="server" ID="btSelectAll" CssClass="btn btn-default" OnClick="btSelectAll_Click"><i class="fa fa-check-square"></i> Select All</asp:LinkButton>
@@ -31,10 +31,10 @@
                                 </div>
                             </div>
                         </asp:Panel>
+                        <%-- Filter Panel  --%>
                         <asp:Panel ID="pnlToolFilter" runat="server" CssClass="col-sm-4">
                             <div class="form-group">
                                 <div class="input-group input-group-sm">
-                                    <%-- Filter Panel  --%>
                                     <asp:Panel runat="server" ID="pnlFilter" ClientIDMode="Static" CssClass="input-group-btn">
                                         <asp:LinkButton runat="server" ID="btFilterTagBy" CssClass="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filter by <span class="caret"></span></asp:LinkButton>
                                     </asp:Panel>
@@ -42,7 +42,8 @@
                                 </div>
                             </div>
                         </asp:Panel>
-                        <asp:Panel ID="pnlToolGroups" runat="server" CssClass="col-sm-4">
+                        <%--Items vy Page--%>
+                        <asp:Panel ID="pnlToolGroups" runat="server" CssClass="col-sm-2">
                             <div class="form-group">
                                 <label for="ddPagesSizes" class="hidden-xs control-label">Items:</label>
                                 <asp:DropDownList runat="server" ID="ddPagesSizes" CssClass="input-sm form-control dropdown dropdown-toggle" ClientIDMode="Static">

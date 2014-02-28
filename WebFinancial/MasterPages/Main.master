@@ -38,6 +38,7 @@
                     <asp:ScriptReference Name="WebFormsBundle" />
                     <%--Site Scripts--%>
                     <asp:ScriptReference Path="~/Scripts/validations.js" />
+                    <asp:ScriptReference Path="~/Scripts/app/actions-general.js" />
                 </Scripts>
             </asp:ScriptManager>
             <asp:ContentPlaceHolder ID="MasterMainContent" runat="server" />
