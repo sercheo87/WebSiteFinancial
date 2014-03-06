@@ -1,14 +1,14 @@
-﻿using DataObjects.Managment;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Default : WebView<object>
+public partial class Views_UserControls_Publicity : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
     }
 }

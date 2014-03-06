@@ -10,7 +10,7 @@
         <asp:Literal runat="server" Text="<%$Resources: WebUILabels, ApplicationName%>" /></title>
 
     <asp:ContentPlaceHolder ID="MasterHeadContent" runat="server" />
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
 </head>
 <body role="document">
     <div role="main" class="container">
@@ -26,6 +26,8 @@
                     <asp:ScriptReference Path="~/Scripts/bootstrap-select.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.maskedinput-1.3.1.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.validate.js" />
+                    <asp:ScriptReference Path="~/Scripts/Highcharts-3.0.1/js/highcharts.src.js" />
+                    <asp:ScriptReference Path="~/Scripts/Highcharts-3.0.1/js/modules/exporting.js" />
                     <asp:ScriptReference Name="respond" />
                     <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
                     <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />

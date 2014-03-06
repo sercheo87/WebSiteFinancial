@@ -120,11 +120,17 @@
   <data name="GRP_SETTINGS" xml:space="preserve">
     <value>Configuraciones</value>
   </data>
+  <data name="GRP_TRANSFERS" xml:space="preserve">
+    <value>Transferencias</value>
+  </data>
   <data name="LNK_CHANGE_PASSWORD" xml:space="preserve">
     <value>Cambio de contraseña</value>
   </data>
   <data name="LNK_DISPLAY_SETTINGS" xml:space="preserve">
     <value>Configuración visual</value>
+  </data>
+  <data name="LNK_TRANSFER_TEST" xml:space="preserve">
+    <value>PruebaTransferencia</value>
   </data>
   <data name="TST_DATA_INPUTS" xml:space="preserve">
     <value>Ingreso de datos</value>

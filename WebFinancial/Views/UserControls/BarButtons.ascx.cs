@@ -37,10 +37,12 @@ public partial class Views_UserControls_BarButtons : System.Web.UI.UserControl
                 btConfirm.Visible = true;
                 break;
         }
+
     }
 
-    #region "Properties Public"
+    #region Types Bar Toolbar
     private TypeBarEnum _typeBarEnum;
+
     public TypeBarEnum BarType
     {
         set
@@ -53,10 +55,27 @@ public partial class Views_UserControls_BarButtons : System.Web.UI.UserControl
             return _typeBarEnum;
         }
     }
+
     #endregion
 
-    #region "Button Public"
-    public Button getButtonAccept
+    #region TextAlign Buttom
+    private String _textBtConfirm;
+
+    public String TextBtConfirm
+    {
+        get
+        {
+            return _textBtConfirm;
+        }
+        set
+        {
+            _textBtConfirm = value;
+        }
+    }
+    #endregion
+
+    #region Button Public
+    public LinkButton getButtonAccept
     {
         get { return btAccept; }
     }

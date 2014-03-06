@@ -24,6 +24,10 @@ namespace Adapters.DataAccess.SQL.Menu
             options.Add(new MenuItem() { ID = 11, ParentID = 10, Resource = "LNK_DISPLAY_SETTINGS", Link = "~/Settings/Display", Icon = "" });
             options.Add(new MenuItem() { ID = 12, ParentID = 10, Resource = "LNK_CHANGE_PASSWORD", Link = "~/Account/ChangePassword", Icon = "" });
 
+
+            options.Add(new MenuItem() { ID = 13, Resource = "GRP_TRANSFERS" });
+            options.Add(new MenuItem() { ID = 14, ParentID = 13, Resource = "LNK_TRANSFER_TEST", Link = "~/Transfers/Transfer", Icon = "" });
+
             return options;
         }
     }
