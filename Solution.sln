@@ -118,13 +118,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial", "http://loca
 		Svn.Uri = WebFinancial/
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4F3DD02A-A12A-4B97-84A6-D0EC9E4A352D}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

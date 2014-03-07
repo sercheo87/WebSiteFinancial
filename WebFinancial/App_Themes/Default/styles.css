@@ -308,12 +308,6 @@ div[id=messageWarningIcon] {
 /* DEFAULTS
 ----------------------------------------------------------*/
 
-body {
-    font-size: 12px;
-    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-    color: #696969;
-}
-
 p {
     margin-bottom: 10px;
     line-height: 1.6em;
