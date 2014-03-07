@@ -48,15 +48,20 @@
 @import "bootstrap/utilities.less";
 @import "bootstrap/responsive-utilities.less";
 
+
+body {
+    font-size: @font-size-base;
+    font-family: @font-family-base;
+    color: #696969;
+    padding-top: 70px;
+}
+
 .navbar-static-top {
     z-index: @zindex-navbar;
     border-width: 0 0 1px;
     border-radius: @border-radius-base;
 }
 
-body {
-    padding-top: 70px;
-}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
     .publicity {
