@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Shared", "01. Shared", "{1263ADD6-AC6B-42AE-AD1E-C58C1F8A2732}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Adapters", "02. Adapters", "{DA504BCA-2EC7-4ABA-BD7F-83F883159C73}"
@@ -11,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Presentation", "03. Pre
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. View", "04. View", "{A6462F9F-990B-4458-8A42-60A045311A5D}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI(1)", "WebUI\", "{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
@@ -34,7 +32,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI(1)", "WebUI\", "{6FC5
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "39904"
-		SlnRelativePath = "WebUI\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 	ProjectSection(SvnOrigin) = preProject
@@ -89,7 +86,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Demo", "05. Demo", "{AE0926F9-A54D-4F03-8835-736F64C3FC94}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial(4)", "http://localhost:51128", "{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial", "http://localhost:51128", "{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
@@ -119,6 +116,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial(4)", "http://l
 		@Keys = Enlist,Svn.Uri
 		Enlist = Required
 		Svn.Uri = WebFinancial/
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4F3DD02A-A12A-4B97-84A6-D0EC9E4A352D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
