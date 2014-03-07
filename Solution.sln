@@ -13,10 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. View", "04. View", "{A6
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI(1)", "WebUI\", "{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4}"
 	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = ""
-		SccAuxPath = ""
-		SccLocalPath = ""
-		SccProvider = ""
+		SccProjectName = "Svn"
+		SccAuxPath = "Svn"
+		SccLocalPath = "Svn"
+		SccProvider = "SubversionScc"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		ProjectReferences = "{80EDB011-2538-4F5F-8702-335C0BB97274}|Presentation.Test.dll;{443E19FE-2823-43C8-AFD5-5701172F4CD1}|Presentation.Commons.dll;{8B14F8E7-C8E1-473C-B97B-D8FEF94571C3}|Presentation.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{0A1055F3-B6CB-40C2-B4C1-B1BFCA1938F9}|Presentation.Security.dll;{BEA4894F-6661-4352-9BC2-63AE1094575D}|Shared.IoC.dll;{15962882-22EB-4938-B6DE-F58AD48A74BC}|Shared.Infrastructure.Messaging.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{4738C484-3A15-4CFD-B98C-2CFE71FDBB1B}|Shared.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WebUI"
@@ -36,6 +36,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI(1)", "WebUI\", "{6FC5
 		VWDPort = "39904"
 		SlnRelativePath = "WebUI\"
 		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = WebUI/
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{7D4F1488-08CF-466F-B677-2F0F3E890CC6}"
@@ -110,8 +115,17 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial(4)", "http://l
 		SlnRelativePath = "WebFinancial\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = WebFinancial/
+	EndProjectSection
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
