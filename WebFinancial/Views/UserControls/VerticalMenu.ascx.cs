@@ -51,6 +51,7 @@ public partial class Views_UserControls_VerticalMenu : WebUserControl<VerticalMe
                 a.Attributes.Add("class", "dropdown-toggle");
                 a.Attributes.Add("data-toggle", "dropdown");
                 a.Attributes.Add("key", option.ID.ToString());
+                a.Attributes.Add("href", "#");
                 a.InnerText = option.Resource.Trim();
                 ul.Attributes.Add("class", "dropdown-menu");
 
