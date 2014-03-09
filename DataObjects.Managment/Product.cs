@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataObjects.Managment
 {
+    [Serializable]
     public class Product
     {
         public string Account { get; set; }
