@@ -193,4 +193,22 @@
   <data name="THEME_DEFAULT" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="Product_3" xml:space="preserve">
+    <value>Checking</value>
+  </data>
+  <data name="Product_4" xml:space="preserve">
+    <value>Saving</value>
+  </data>
+  <data name="Total_Actives" xml:space="preserve">
+    <value>Total Actives </value>
+  </data>
+  <data name="Total_Passive" xml:space="preserve">
+    <value>Total Pasives </value>
+  </data>
+  <data name="Product_7" xml:space="preserve">
+    <value>Loans</value>
+  </data>
+  <data name="Total_Real" xml:space="preserve">
+    <value>Total Real </value>
+  </data>
 </root>

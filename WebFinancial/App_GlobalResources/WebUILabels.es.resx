@@ -193,4 +193,22 @@
   <data name="THEME_DEFAULT" xml:space="preserve">
     <value>Predeterminado</value>
   </data>
+  <data name="Product_3" xml:space="preserve">
+    <value>Corrientes</value>
+  </data>
+  <data name="Product_4" xml:space="preserve">
+    <value>Ahorros</value>
+  </data>
+  <data name="Total_Actives" xml:space="preserve">
+    <value>Total Activas </value>
+  </data>
+  <data name="Total_Passive" xml:space="preserve">
+    <value>Total Pasivas </value>
+  </data>
+  <data name="Product_7" xml:space="preserve">
+    <value>Prestamos</value>
+  </data>
+  <data name="Total_Real" xml:space="preserve">
+    <value>Total Real </value>
+  </data>
 </root>
