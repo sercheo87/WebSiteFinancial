@@ -25,8 +25,8 @@
                     <asp:ScriptReference Path="~/Scripts/bootstrap-select.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.maskedinput-1.3.1.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.validate.js" />
-                    <asp:ScriptReference Path="~/Scripts/Highcharts-3.0.9/js/highcharts-all.js" />
-                    <asp:ScriptReference Path="~/Scripts/Highcharts-3.0.9/js/modules/drilldown.js" />
+                    <asp:ScriptReference Path="~/app/Highcharts-3.0.9/js/highcharts-all.js" />
+                    <asp:ScriptReference Path="~/app/Highcharts-3.0.9/js/modules/drilldown.js" />
                     <asp:ScriptReference Name="respond" />
                     <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
                     <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
@@ -38,8 +38,8 @@
                     <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                     <asp:ScriptReference Name="WebFormsBundle" />
                     <%--Site Scripts--%>
-                    <asp:ScriptReference Path="~/Scripts/validations.js" />
-                    <asp:ScriptReference Path="~/Scripts/app/actions-general.js" />
+                    <asp:ScriptReference Path="~/app/validations.js" />
+                    <asp:ScriptReference Path="~/app/actions-general.js" />
                 </Scripts>
             </asp:ScriptManager>
             <asp:ContentPlaceHolder ID="MasterMainContent" runat="server" />
