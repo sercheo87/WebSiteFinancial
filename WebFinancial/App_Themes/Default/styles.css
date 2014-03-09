@@ -308,11 +308,6 @@ div[id=messageWarningIcon] {
 /* DEFAULTS
 ----------------------------------------------------------*/
 
-p {
-    margin-bottom: 10px;
-    line-height: 1.6em;
-}
-
 /* this rule styles <h1> and <h2> tags that are the 
 first child of the left and right table columns */
 .rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2 {
