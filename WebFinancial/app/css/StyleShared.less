@@ -48,12 +48,15 @@
 @import "../../Content/bootstrap/utilities.less";
 @import "../../Content/bootstrap/responsive-utilities.less";
 
-
+//Plugins Site
+@import "carousel-publicity.less";
+html,
 body {
     font-size: @font-size-base;
     font-family: @font-family-base;
     color: #696969;
-    padding-top: 70px;
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+    padding-top: 40px;
 }
 
 .navbar-static-top {
