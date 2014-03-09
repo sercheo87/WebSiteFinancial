@@ -113,24 +113,7 @@
             </div>
             <%--Panel Lateral--%>
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                <uc:PanelControl runat="server" ID="pnlConsolidate" Title="Consolidado" TypePanel="primary">
-                    <Content>
-                        <uc:ConsolidateProduct runat="server" ID="cpSaving"></uc:ConsolidateProduct>
-                    </Content>
-                </uc:PanelControl>
-
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item active">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                </div>
+                <asp:ContentPlaceHolder ID="LateralContent" runat="server" />
             </div>
         </div>
         <div class="footer">
