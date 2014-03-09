@@ -29,6 +29,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         Data dttemp = new Data(new[] { 
             new DotNet.Highcharts.Options.Point { 
                 Y = 4455,
+                Sliced=true,
                 Color= Color.SkyBlue,  
                 Drilldown = new Drilldown { 
                     Categories=new[]{"1111","2222","1122"}, 
@@ -37,6 +38,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
             },
             new DotNet.Highcharts.Options.Point { 
                 Y = 7777,
+                Sliced=true,
                 Color= Color.SkyBlue,  
                 Drilldown = new Drilldown { 
                     Categories=new[]{"3333","4444"}, 
@@ -47,9 +49,9 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
 
         Highcharts chart = new Highcharts("chart")
        .InitChart(new DotNet.Highcharts.Options.Chart() { DefaultSeriesType = DotNet.Highcharts.Enums.ChartTypes.Column })
-       .SetLegend(new DotNet.Highcharts.Options.Legend() { Enabled = false, Shadow = true })
+       .SetLegend(new DotNet.Highcharts.Options.Legend() { Enabled = true, Shadow = true })
        .SetCredits(new Credits() { Enabled = false })
-       .SetTitle(new DotNet.Highcharts.Options.Title { Text = "Consolidate Posicion" })
+       .SetTitle(new DotNet.Highcharts.Options.Title { Text = "Consolidate Posicion", Align = HorizontalAligns.Center })
        .SetSubtitle(new Subtitle() { Text = "Detail of accounts from client." })
        .SetTooltip(new Tooltip()
        {
@@ -64,7 +66,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
        })
        .SetPlotOptions(new PlotOptions()
        {
-           Columnrange = new PlotOptionsColumnrange() { Animation = new Animation(false), DataLabels = new PlotOptionsColumnrangeDataLabels() { Enabled = true } },
+           Columnrange = new PlotOptionsColumnrange() { DataLabels = new PlotOptionsColumnrangeDataLabels() { Enabled = true } },
            Column = new PlotOptionsColumn()
            {
                Shadow = false,
@@ -75,6 +77,21 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
                {
                    Enabled = true,
                    Formatter = @"function() {return '$ '+this.point.y;}",
+                   Style = "fontWeight: 'bold'"
+               }
+           },
+           Pie = new PlotOptionsPie()
+           {
+               ShowInLegend = true,
+               AllowPointSelect = true,
+               Cursor = Cursors.Pointer,
+               Point = new PlotOptionsPiePoint { Events = new PlotOptionsPiePointEvents { Click = "ColumnPointClick" } },
+               Animation = new Animation(new AnimationConfig { Duration = 500, Easing = EasingTypes.EaseOutBounce }),
+               DataLabels = new PlotOptionsPieDataLabels()
+               {
+                   Enabled = true,
+                   Distance = -50,
+                   Format = "<b>{point.name}</b>: {point.percentage:.2f} %",
                    Style = "fontWeight: 'bold'"
                }
            }
