@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
+using DataObjects.Managment;
 
 public partial class Views_UserControls_Consolidate_Product : System.Web.UI.UserControl
 {
@@ -19,7 +20,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         public string name { get; set; }
         //public List<object> data { get; set; }
         public string drilldown { get; set; }
-        public int y { get; set; }
+        public object y { get; set; }
     }
     public class ChartExDrillDown
     {
@@ -27,9 +28,41 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         public List<object> data { get; set; }
         public string id { get; set; }
     }
-    public string Series1 { get; set; }
-    public string DrillDownSeries { get; set; }
+
+    #region Public Parameters Dto Product Collection
+    /// <summary>
+    /// Collection of data products
+    /// </summary>
+    public List<Product> ProductsCollection
+    {
+        get { return (List<Product>)ViewState["ProductsCollection"]; }
+        set { ViewState["ProductsCollection"] = value; }
+    }
+
+    /// <summary>
+    /// List product of type actives
+    /// </summary>
+    public List<int> ProductTypeActives
+    {
+        get { return (List<int>)ViewState["ProductTypeActives"]; }
+        set { ViewState["ProductTypeActives"] = value; }
+    }
+
+    /// <summary>
+    /// List product of type pasives
+    /// </summary>
+    public List<int> ProductTypePasives
+    {
+        get { return (List<int>)ViewState["ProductTypePasives"]; }
+        set { ViewState["ProductTypePasives"] = value; }
+    }
+    #endregion
+
+    #region Public Parameters Data
+    public string dtSeries { get; set; }
+    public string dtDrillDownSeries { get; set; }
     public string Xaxis { get; set; }
+    #endregion
 
     #region Public Properties Look&Feel
     public int HeigthChart
@@ -108,22 +141,16 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     }
     #endregion
 
-    private XAxis xAxis = new XAxis();
-    private DotNet.Highcharts.Options.Chart chartInitProperties = new DotNet.Highcharts.Options.Chart();
+    protected List<ChartExSeries> chListSeries = new List<ChartExSeries>();
+    protected List<ChartExDrillDown> chListDrill = new List<ChartExDrillDown>();
+
     protected void Page_InitComplete(object sender, EventArgs e)
     {
     }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         Render_Chart();
-        List<int> lstXaxis = new List<int>();
-        lstXaxis.Add(2007);
-        lstXaxis.Add(2008);
-        lstXaxis.Add(2009);
-        lstXaxis.Add(2010);
-
-        List<ChartExSeries> chListSeries = new List<ChartExSeries>();
-        List<ChartExDrillDown> chListDrill = new List<ChartExDrillDown>();
 
         /*Activas - Yaxis*/
         //------------------------------------------------------------------
@@ -140,8 +167,8 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         _DrillActivas.data.Add(new List<object>() { "Cta: 22222222", 1000 });
         _DrillActivas.data.Add(new List<object>() { "Cta: 33333333", 500 });
 
-        chListDrill.Add(_DrillActivas);
-        chListSeries.Add(chSerieActivas);
+        //chListDrill.Add(_DrillActivas);
+        //chListSeries.Add(chSerieActivas);
         //------------------------------------------------------------------
 
         /*Pasivas - Yaxis*/
@@ -158,174 +185,56 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         _DrillPasivas.data.Add(new List<object>() { "Cta: 44444444", 1000 });
         _DrillPasivas.data.Add(new List<object>() { "Cta: 55555555", 200 });
 
-        chListDrill.Add(_DrillPasivas);
-        chListSeries.Add(chSeriePasivas);
+        // chListDrill.Add(_DrillPasivas);
+        //chListSeries.Add(chSeriePasivas);
         //------------------------------------------------------------------
 
-        /*Otros - Yaxis*/
-        //------------------------------------------------------------------     
-        ChartExSeries chSerieOtros = new ChartExSeries();
-        chSerieOtros.name = "Otros";
-        chSerieOtros.y = 5000;
-        chSerieOtros.drilldown = "null";
-        chListSeries.Add(chSerieOtros);
+        //JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
+        //dtSeries = oSerializer1.Serialize(chListSeries);
 
-        JavaScriptSerializer oSerializer = new JavaScriptSerializer();
-        Xaxis = oSerializer.Serialize(lstXaxis);
-
-        JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
-        Series1 = oSerializer1.Serialize(chListSeries);
-
-        JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
-        DrillDownSeries = oSerializer2.Serialize(chListDrill);
+        //JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
+        //dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
     protected void Render_Chart()
     {
-        string[] dtCategories = new[] { "Checking", "Saving" };
-        Data dtAvailable = new Data(new object[] { 12 });
-        Data dtCurrent = new Data(new object[] { -2 });
-        Data dttemp = new Data(new[] { 
-            new DotNet.Highcharts.Options.Point { 
-                Y = 4455,
-                Sliced=true,
-                Color= Color.SkyBlue,  
-                Drilldown = new Drilldown { 
-                    Categories=new[]{"1111","2222","1122"}, 
-                    Name = "Account 1",
-                    Data=new Data(new object[]{1.2,2.3,22.35})}
-            },
-            new DotNet.Highcharts.Options.Point { 
-                Y = 7777,
-                Sliced=true,
-                Color= Color.SkyBlue,  
-                Drilldown = new Drilldown { 
-                    Categories=new[]{"3333","4444"}, 
-                    Name = "Account 2",
-                    Data=new Data(new object[]{33,334})}
-            }
-        });
-
-        chartInitProperties = new DotNet.Highcharts.Options.Chart()
-         {
-             DefaultSeriesType = DotNet.Highcharts.Enums.ChartTypes.Column,
-             Height = HeigthChart,
-             Width = WidthChart
-         };
-
-
-        Highcharts chart = new Highcharts("chart");
-        SetFormatGrid(chart);
-        xAxis.Categories = dtCategories;
-        chart.InitChart(chartInitProperties)
-        .SetLegend(new DotNet.Highcharts.Options.Legend() { Enabled = true, Shadow = true })
-        .SetCredits(new Credits() { Enabled = false })
-        .SetTitle(new DotNet.Highcharts.Options.Title { Text = "Consolidate Posicion", Align = HorizontalAligns.Center })
-        .SetSubtitle(new Subtitle() { Text = "Detail of accounts from client." })
-        .SetTooltip(new Tooltip()
+        var obj = ProductsCollection.GroupBy(g => g.Type);
+        foreach (var typeProduct in obj)
         {
-            Enabled = true,
-            HeaderFormat = "<span style=\"font-size:13px\">{series.name}</span><table>",
-            PointFormat = "<tr><td style=\"color:{series.color};padding:0\"><b>{point.name}:</b> ${point.y:.2f}</td></tr>",
-            FooterFormat = "</table>",
-            ValueSuffix = " Usd",
-            UseHTML = true,
-            HideDelay = 0,
-            Shared = true
-        })
-        .SetPlotOptions(new PlotOptions()
-        {
-            Columnrange = new PlotOptionsColumnrange() { DataLabels = new PlotOptionsColumnrangeDataLabels() { Enabled = true } },
-            Column = new PlotOptionsColumn()
-            {
-                Shadow = false,
-                Cursor = Cursors.Pointer,
-                Point = new PlotOptionsColumnPoint { Events = new PlotOptionsColumnPointEvents { Click = "ColumnPointClick" } },
-                Animation = new Animation(new AnimationConfig { Duration = 500, Easing = EasingTypes.EaseOutBounce }),
-                DataLabels = new PlotOptionsColumnDataLabels()
-                {
-                    Enabled = true,
-                    Formatter = @"function() {return '$ '+this.point.y;}",
-                    Style = "fontWeight: 'bold'"
-                }
-            },
-            Pie = new PlotOptionsPie()
-            {
-                ShowInLegend = true,
-                AllowPointSelect = true,
-                Cursor = Cursors.Pointer,
-                Point = new PlotOptionsPiePoint { Events = new PlotOptionsPiePointEvents { Click = "ColumnPointClick" } },
-                Animation = new Animation(new AnimationConfig { Duration = 500, Easing = EasingTypes.EaseOutBounce }),
-                DataLabels = new PlotOptionsPieDataLabels()
-                {
-                    Enabled = true,
-                    Distance = -50,
-                    Format = "<b>{point.name}</b>: {point.percentage:.2f} %",
-                    Style = "fontWeight: 'bold'"
-                }
-            }
-        })
-        .SetXAxis(xAxis)
-        .SetYAxis(new YAxis { Title = new YAxisTitle { Text = String.Empty } })
-        .SetSeries(new DotNet.Highcharts.Options.Series[] { new DotNet.Highcharts.Options.Series { Name = "Available", Data = dttemp } })
-        .AddJavascripFunction("ColumnPointClick",
-                    @"var drilldown = this.drilldown;
-                              if (drilldown) { // drill down
-                                setChart(drilldown.name, drilldown.categories, drilldown.data.data, drilldown.color);
-                              } else { // restore
-                                setChart(name, categories, data.data);
-                              }")
-        .AddJavascripFunction("setChart",
-                    @"chart.xAxis[0].setCategories(categories);
-                              chart.series[0].remove();
-                              chart.addSeries({
-                                 name: name,
-                                 data: data,
-                                 color: color || 'white'
-                              });",
-                    "name", "categories", "data", "color"
-                )
-        .AddJavascripVariable("colors", "Highcharts.getOptions().colors")
-        .AddJavascripVariable("name", "'{0}'".FormatWith("demo chart"))
-        .AddJavascripVariable("categories", JsonSerializer.Serialize(dtCategories))
-        .AddJavascripVariable("data", JsonSerializer.Serialize(dttemp));
+            int valueFilter = int.Parse(typeProduct.Key.ToString());
+            List<Product> collectionFilter = ProductsCollection.Where(x => x.Type == valueFilter).ToList();
+            CreateSeries(valueFilter, collectionFilter);
+        }
+        JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
+        dtSeries = oSerializer1.Serialize(chListSeries);
 
-        ltrChart.Text = chart.ToHtmlString();
+        JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
+        dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
-    public void SetFormatGrid(Highcharts chart)
+    protected void CreateSeries(int TypesProduct, List<Product> collectionDto)
     {
-        ColorConverter ccvrt = new ColorConverter();
+        string lbProduct = (GetGlobalResourceObject("WebUILabels", string.Concat("Product_", TypesProduct)) == null ? string.Empty : GetGlobalResourceObject("WebUILabels", String.Concat("Product_", TypesProduct)).ToString());
+        string lbDrill = String.Concat("_Drill_", TypesProduct);
+        ChartExSeries chSerie = new ChartExSeries();
+        chSerie.name = lbProduct;
+        chSerie.y = collectionDto.Where(x => ProductTypeActives.Contains(TypesProduct)).Sum(x => x.AmmountAvailable);
+        chSerie.drilldown = lbDrill;
 
-        GlobalOptions chartOptions = new GlobalOptions()
+        ChartExDrillDown _Drill = new ChartExDrillDown();
+        _Drill.id = lbDrill;
+        _Drill.name = lbDrill;
+        _Drill.data = new List<object>();
+
+        foreach (Product item in collectionDto)
         {
-            Colors = new Color[] { 
-            ((Color)ccvrt.ConvertFromString("#058DC7")),
-            ((Color)ccvrt.ConvertFromString("#50B432")),
-            ((Color)ccvrt.ConvertFromString("#ED561B")),
-            ((Color)ccvrt.ConvertFromString("#DDDF00")),
-            ((Color)ccvrt.ConvertFromString("#24CBE5")),
-            ((Color)ccvrt.ConvertFromString("#64E572")),
-            ((Color)ccvrt.ConvertFromString("#FF9655")),
-            ((Color)ccvrt.ConvertFromString("#FFF263")),
-            ((Color)ccvrt.ConvertFromString("#6AF9C4"))}
-        };
+            _Drill.data.Add(new List<object>() { 
+                String.Concat("Cta:", item.Account), 
+                item.AmmountAvailable
+            });
+        }
 
-
-        chartInitProperties.BackgroundColor = new BackColorOrGradient(new Gradient()
-          {
-              LinearGradient = new int[] { 0, 0, 1, 1 },
-              Stops = new object[,] { { 0, Color.FromArgb(255, 255, 255) }, { 1, Color.FromArgb(240, 240, 255) } }
-          });
-        chartInitProperties.BorderWidth = 2;
-        chartInitProperties.PlotBackgroundColor = new BackColorOrGradient(Color.FromArgb(1, 255, 255, 255));
-        chartInitProperties.PlotShadow = true;
-        chartInitProperties.PlotBorderWidth = 1;
-        chart.SetOptions(chartOptions);
-
-        xAxis.LineWidth = 1;
-        xAxis.LineColor = ColorTranslator.FromHtml("#000");
-        xAxis.TickColor = ColorTranslator.FromHtml("#000");
-        xAxis.Labels = new XAxisLabels() { Style = "color:'#000'" };
+        chListDrill.Add(_Drill);
+        chListSeries.Add(chSerie);
     }
 }

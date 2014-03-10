@@ -14,7 +14,7 @@
         $(document).ready(function () {
             chart = new Highcharts.Chart({
                 chart: {
-                    renderTo:'demo',
+                    renderTo:'dvChart',
                     type: 'column',
                     height: _heigth,
                     width: _width
@@ -47,7 +47,7 @@
                         borderWidth: 0,
                         dataLabels: {
                             enabled: true,
-                            format: 'USD {point.y:.1f}'
+                            format: 'USD $ {point.y:.2f}'
                         }
                     }
                 },
@@ -58,16 +58,13 @@
                 series: [{
                     name: 'Brands',
                     colorByPoint: true,
-                    data: <%=Series1 %>
+                    data: <%=dtSeries %>
                     }],
                 drilldown: {
-                    series: <%=DrillDownSeries %>
+                    series: <%=dtDrillDownSeries %>
                     }
             });
         });
     });
 </script>
-<div id="demo" style="width: 100%; height: 400px;"></div>
-<asp:Panel runat="server" ID="pnChart">
-    <asp:Literal ID="ltrChart" runat="server"></asp:Literal>
-</asp:Panel>
+<asp:Panel runat="server" ID="dvChart" ClientIDMode="Static"></asp:Panel>

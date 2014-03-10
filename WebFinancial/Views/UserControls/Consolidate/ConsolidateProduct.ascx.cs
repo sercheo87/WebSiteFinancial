@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserControl
 {
-    #region Public Parameters
+    #region Public Parameters Dto Product Collection
     /// <summary>
     /// Collection of data products
     /// </summary>
