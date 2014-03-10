@@ -98,7 +98,7 @@ public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserC
             HtmlGenericControl hgIcon = new HtmlGenericControl("i");
             hgIcon.Attributes["class"] = "fa fa-bars";
             lbEtqDt.Controls.Add(hgIcon);
-            lbEtqDt.Attributes["class"] = "text-right";
+            //lbEtqDt.Attributes["class"] = "text-right";
             Literal ltEtiqueta = new Literal();
             lbEtqDt.Controls.Add(ltEtiqueta);
             HtmlGenericControl lbEtqDd = new HtmlGenericControl("dd");
@@ -159,6 +159,7 @@ public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserC
             {
                 pnRow.ForeColor = (dr["tendency"].ToString().Equals("+") ? Color.Green : Color.Red);
             }
+
             //Etiqueta
             Panel pnCol = new Panel();
             pnRow.Controls.Add(pnCol);
@@ -182,6 +183,11 @@ public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserC
             hgSpanValue.Attributes["class"] = string.Concat("", (dr["tendency"].ToString().Equals("+") ? "success" : "danger"));
             hgSpanValue.InnerText = string.Concat(dr["value"]);
             repeatItem.Controls.Add(pnRow);
+
+            //Linea
+            Literal hgLine = new Literal();
+            hgLine.Text = "<hr>";
+            repeatItem.Controls.Add(hgLine);
         }
         pnlControlItem.PlaceHolderContent.Controls.Add(rpBodyContent);
         return pnlControlItem;
