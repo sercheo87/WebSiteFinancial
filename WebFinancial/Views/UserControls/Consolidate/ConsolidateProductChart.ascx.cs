@@ -10,10 +10,28 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
+using System.Web.Script.Serialization;
 
 public partial class Views_UserControls_Consolidate_Product : System.Web.UI.UserControl
 {
-    #region Public Properties
+    public class ChartExSeries
+    {
+        public string name { get; set; }
+        //public List<object> data { get; set; }
+        public string drilldown { get; set; }
+        public int y { get; set; }
+    }
+    public class ChartExDrillDown
+    {
+        public string name { get; set; }
+        public List<object> data { get; set; }
+        public string id { get; set; }
+    }
+    public string Series1 { get; set; }
+    public string DrillDownSeries { get; set; }
+    public string Xaxis { get; set; }
+
+    #region Public Properties Look&Feel
     public int HeigthChart
     {
         get
@@ -36,12 +54,60 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         }
         set { ViewState["WidthChart"] = value; }
     }
-    public bool AllowExport
+    public string AllowExport
     {
-        get { return (bool)ViewState["AllowExport"]; }
-        set { ViewState["AllowExport"] = value; }
+        get { return (string)ViewState["AllowExport"]; }
+        set { ViewState["AllowExport"] = value.ToString().ToLower(); }
     }
     #endregion
+
+    #region Public Label's
+    public string TitleXAxis
+    {
+        get
+        {
+            if (ViewState["TitleXAxis"] == null)
+                return string.Empty;
+            else
+                return (string)ViewState["TitleXAxis"];
+        }
+        set { ViewState["TitleXAxis"] = value.ToString(); }
+    }
+    public string TitleYAxis
+    {
+        get
+        {
+            if (ViewState["TitleYAxis"] == null)
+                return string.Empty;
+            else
+                return (string)ViewState["TitleYAxis"];
+        }
+        set { ViewState["TitleYAxis"] = value.ToString(); }
+    }
+    public string TitleChart
+    {
+        get
+        {
+            if (ViewState["TitleChart"] == null)
+                return string.Empty;
+            else
+                return (string)ViewState["TitleChart"];
+        }
+        set { ViewState["TitleChart"] = value.ToString(); }
+    }
+    public string SubTitleChart
+    {
+        get
+        {
+            if (ViewState["SubTitleChart"] == null)
+                return string.Empty;
+            else
+                return (string)ViewState["SubTitleChart"];
+        }
+        set { ViewState["SubTitleChart"] = value.ToString(); }
+    }
+    #endregion
+
     private XAxis xAxis = new XAxis();
     private DotNet.Highcharts.Options.Chart chartInitProperties = new DotNet.Highcharts.Options.Chart();
     protected void Page_InitComplete(object sender, EventArgs e)
@@ -50,6 +116,68 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     protected void Page_Load(object sender, EventArgs e)
     {
         Render_Chart();
+        List<int> lstXaxis = new List<int>();
+        lstXaxis.Add(2007);
+        lstXaxis.Add(2008);
+        lstXaxis.Add(2009);
+        lstXaxis.Add(2010);
+
+        List<ChartExSeries> chListSeries = new List<ChartExSeries>();
+        List<ChartExDrillDown> chListDrill = new List<ChartExDrillDown>();
+
+        /*Activas - Yaxis*/
+        //------------------------------------------------------------------
+        ChartExSeries chSerieActivas = new ChartExSeries();
+        chSerieActivas.name = "Activas";
+        chSerieActivas.y = 2500;
+        chSerieActivas.drilldown = "_DrillActivas";
+
+        ChartExDrillDown _DrillActivas = new ChartExDrillDown();
+        _DrillActivas.id = "_DrillActivas";
+        _DrillActivas.name = "_DrillActivas";
+        _DrillActivas.data = new List<object>();
+        _DrillActivas.data.Add(new List<object>() { "Cta: 11111111", 1000 });
+        _DrillActivas.data.Add(new List<object>() { "Cta: 22222222", 1000 });
+        _DrillActivas.data.Add(new List<object>() { "Cta: 33333333", 500 });
+
+        chListDrill.Add(_DrillActivas);
+        chListSeries.Add(chSerieActivas);
+        //------------------------------------------------------------------
+
+        /*Pasivas - Yaxis*/
+        //------------------------------------------------------------------       
+        ChartExSeries chSeriePasivas = new ChartExSeries();
+        chSeriePasivas.name = "Pasivas";
+        chSeriePasivas.y = 1200;
+        chSeriePasivas.drilldown = "_DrillPasivas";
+
+        ChartExDrillDown _DrillPasivas = new ChartExDrillDown();
+        _DrillPasivas.id = "_DrillPasivas";
+        _DrillPasivas.name = "_DrillPasivas";
+        _DrillPasivas.data = new List<object>();
+        _DrillPasivas.data.Add(new List<object>() { "Cta: 44444444", 1000 });
+        _DrillPasivas.data.Add(new List<object>() { "Cta: 55555555", 200 });
+
+        chListDrill.Add(_DrillPasivas);
+        chListSeries.Add(chSeriePasivas);
+        //------------------------------------------------------------------
+
+        /*Otros - Yaxis*/
+        //------------------------------------------------------------------     
+        ChartExSeries chSerieOtros = new ChartExSeries();
+        chSerieOtros.name = "Otros";
+        chSerieOtros.y = 5000;
+        chSerieOtros.drilldown = "null";
+        chListSeries.Add(chSerieOtros);
+
+        JavaScriptSerializer oSerializer = new JavaScriptSerializer();
+        Xaxis = oSerializer.Serialize(lstXaxis);
+
+        JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
+        Series1 = oSerializer1.Serialize(chListSeries);
+
+        JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
+        DrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
     protected void Render_Chart()
@@ -86,12 +214,10 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
          };
 
 
-        Exporting chartExporting = new Exporting() { Enabled = AllowExport };
         Highcharts chart = new Highcharts("chart");
         SetFormatGrid(chart);
         xAxis.Categories = dtCategories;
         chart.InitChart(chartInitProperties)
-        .SetExporting(chartExporting)
         .SetLegend(new DotNet.Highcharts.Options.Legend() { Enabled = true, Shadow = true })
         .SetCredits(new Credits() { Enabled = false })
         .SetTitle(new DotNet.Highcharts.Options.Title { Text = "Consolidate Posicion", Align = HorizontalAligns.Center })

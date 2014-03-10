@@ -70,7 +70,13 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <uc:ConsolidateProductChart runat="server" HeigthChart="300" AllowExport="false" />
+                            <uc:ConsolidateProductChart runat="server" 
+                                HeigthChart="300"
+                                 AllowExport="false" 
+                                TitleXAxis="Productos" 
+                                TitleYAxis="Valor"
+                                TitleChart="Posicion Consolidada"
+                                SubTitleChart="Detalle de Totalizado de Cuenas" />
                            <%-- <div class="container">
                                 <div class="carousel-caption">
                                     <h1>Example headline.</h1>
