@@ -10,8 +10,6 @@ public partial class MasterPages_Site : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        chConsolidate.ProductTypeActives = new List<int>() { 3, 4 };
-        chConsolidate.ProductTypePasives = new List<int>() { 7 };
     }
     protected void loginDisplay_Command(object sender, CommandEventArgs e)
     {
