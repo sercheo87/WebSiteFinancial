@@ -1,5 +1,6 @@
 ﻿using ASP;
 using DataObjects.Managment;
+using Presentation.Managment;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,18 +11,9 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserControl
+public partial class Views_UserControls_ConsolidateProduct : WebUserControl<SummaryPresenter>, ISummaryView
 {
     #region Public Parameters Dto Product Collection
-    /// <summary>
-    /// Collection of data products
-    /// </summary>
-    public List<Product> ProductsCollection
-    {
-        get { return (List<Product>)ViewState["ProductsCollection"]; }
-        set { ViewState["ProductsCollection"] = value; }
-    }
-
     /// <summary>
     /// List product of type actives
     /// </summary>
@@ -41,10 +33,20 @@ public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserC
     }
     #endregion
 
+    #region Properties Private
+    /// <summary>
+    /// Collection of data products
+    /// </summary>
+    public List<Product> ProductsCollection
+    {
+        get { return (List<Product>)ViewState["ProductsCollection"]; }
+        set { ViewState["ProductsCollection"] = value; }
+    }
+    #endregion
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        GetAllSummaryProduts();
-        pnlParent.Controls.Add(CreateSectionTotal());
+        Presenter.GetProducts();
     }
 
     protected void GetAllSummaryProduts()
@@ -191,5 +193,12 @@ public partial class Views_UserControls_ConsolidateProduct : System.Web.UI.UserC
         }
         pnlControlItem.PlaceHolderContent.Controls.Add(rpBodyContent);
         return pnlControlItem;
+    }
+
+    public void ListProduct(IEnumerable<Product> dataProducts)
+    {
+        ProductsCollection = dataProducts.ToList();
+        GetAllSummaryProduts();
+        pnlParent.Controls.Add(CreateSectionTotal());
     }
 }

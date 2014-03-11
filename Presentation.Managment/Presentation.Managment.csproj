@@ -1,24 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7A640C78-320A-43EF-898E-711808D50449}</ProjectGuid>
+    <ProjectGuid>{278752BB-5A91-45A1-AAC0-A5458ADA8165}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Adapters.Interfaces.Security</RootNamespace>
-    <AssemblyName>Adapters.Interfaces.Security</AssemblyName>
+    <RootNamespace>Presentation.Managment</RootNamespace>
+    <AssemblyName>Presentation.Managment</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <SccProjectName>Svn</SccProjectName>
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,7 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,13 +43,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IUserAdapter.cs" />
+    <Compile Include="ISummaryView.cs" />
+    <Compile Include="SummaryPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataObjects.User\DataObjects.User.csproj">
-      <Project>{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}</Project>
-      <Name>DataObjects.User</Name>
+    <ProjectReference Include="..\Adapters.Interfaces.Managment\Adapters.Interfaces.Managment.csproj">
+      <Project>{12d85436-b559-4b2d-86f7-1d7d3c67c24c}</Project>
+      <Name>Adapters.Interfaces.Managment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataObjects.Managment\DataObjects.Managment.csproj">
+      <Project>{10db4cd6-712b-4245-8892-5dccb0279ffa}</Project>
+      <Name>DataObjects.Managment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation.Commons\Presentation.Commons.csproj">
+      <Project>{443E19FE-2823-43C8-AFD5-5701172F4CD1}</Project>
+      <Name>Presentation.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Commons\Shared.Commons.csproj">
+      <Project>{4738C484-3A15-4CFD-B98C-2CFE71FDBB1B}</Project>
+      <Name>Shared.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Infrastructure.Messaging\Shared.Infrastructure.Messaging.csproj">
+      <Project>{15962882-22EB-4938-B6DE-F58AD48A74BC}</Project>
+      <Name>Shared.Infrastructure.Messaging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

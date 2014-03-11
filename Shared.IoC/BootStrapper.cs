@@ -11,6 +11,8 @@ using Adapters.Interfaces.Security;
 using Adapters.DataAccess.Web.Commons;
 using Adapters.DataAccess.SQL.Menu;
 using Adapters.DataAccess.SQL.Security;
+using Adapters.Interfaces.Managment;
+using Adapters.DataAccess.Managment;
 
 /// <summary>
 /// Summary description for BootStrapper
@@ -33,5 +35,6 @@ public class ModuleRegistry : Registry
         For<IMemoryBag>().Use<MemoryBag>();
         For<IMenuAdapter>().Use<MenuAdapter>();
         For<IUserAdapter>().Use<UserAdapter>();
+        For<IProductsAdapters>().Use<ProductsAdapters>();
     }
 }

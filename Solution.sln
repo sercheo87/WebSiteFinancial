@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Shared", "01. Shared", "{1263ADD6-AC6B-42AE-AD1E-C58C1F8A2732}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Adapters", "02. Adapters", "{DA504BCA-2EC7-4ABA-BD7F-83F883159C73}"
@@ -9,14 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Presentation", "03. Pre
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. View", "04. View", "{A6462F9F-990B-4458-8A42-60A045311A5D}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI(1)", "WebUI\", "{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
 		SccLocalPath = "Svn"
 		SccProvider = "SubversionScc"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{80EDB011-2538-4F5F-8702-335C0BB97274}|Presentation.Test.dll;{443E19FE-2823-43C8-AFD5-5701172F4CD1}|Presentation.Commons.dll;{8B14F8E7-C8E1-473C-B97B-D8FEF94571C3}|Presentation.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{0A1055F3-B6CB-40C2-B4C1-B1BFCA1938F9}|Presentation.Security.dll;{BEA4894F-6661-4352-9BC2-63AE1094575D}|Shared.IoC.dll;{15962882-22EB-4938-B6DE-F58AD48A74BC}|Shared.Infrastructure.Messaging.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{4738C484-3A15-4CFD-B98C-2CFE71FDBB1B}|Shared.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;"
+		ProjectReferences = "{80EDB011-2538-4F5F-8702-335C0BB97274}|Presentation.Test.dll;{443E19FE-2823-43C8-AFD5-5701172F4CD1}|Presentation.Commons.dll;{8B14F8E7-C8E1-473C-B97B-D8FEF94571C3}|Presentation.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{0A1055F3-B6CB-40C2-B4C1-B1BFCA1938F9}|Presentation.Security.dll;{BEA4894F-6661-4352-9BC2-63AE1094575D}|Shared.IoC.dll;{15962882-22EB-4938-B6DE-F58AD48A74BC}|Shared.Infrastructure.Messaging.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{4738C484-3A15-4CFD-B98C-2CFE71FDBB1B}|Shared.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}|Adapters.DataAccess.DataTest.dll;{12D85436-B559-4B2D-86F7-1D7D3C67C24C}|Adapters.Interfaces.Managment.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WebUI"
 		Debug.AspNetCompiler.PhysicalPath = "WebUI\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebUI\"
@@ -32,6 +34,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{6FC5D80
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "39904"
+		SlnRelativePath = "WebUI\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 	ProjectSection(SvnOrigin) = preProject
@@ -86,7 +89,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Demo", "05. Demo", "{AE0926F9-A54D-4F03-8835-736F64C3FC94}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial", "http://localhost:51128", "{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial(4)", "http://localhost:51128", "{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
@@ -94,7 +97,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial", "http://loca
 		SccProvider = "SubversionScc"
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		ProjectReferences = "{4738c484-3a15-4cfd-b98c-2cfe71fdbb1b}|Shared.Commons.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{15962882-22eb-4938-b6de-f58ad48a74bc}|Shared.Infrastructure.Messaging.dll;{bea4894f-6661-4352-9bc2-63ae1094575d}|Shared.IoC.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;{443e19fe-2823-43c8-afd5-5701172f4cd1}|Presentation.Commons.dll;{8b14f8e7-c8e1-473c-b97b-d8fef94571c3}|Presentation.Menu.dll;{0a1055f3-b6cb-40c2-b4c1-b1bfca1938f9}|Presentation.Security.dll;{80edb011-2538-4f5f-8702-335c0bb97274}|Presentation.Test.dll;"
+		ProjectReferences = "{4738c484-3a15-4cfd-b98c-2cfe71fdbb1b}|Shared.Commons.dll;{FB1DDFD2-3366-45E9-9819-DFD01FEEB754}|Adapters.Interfaces.Commons.dll;{15962882-22eb-4938-b6de-f58ad48a74bc}|Shared.Infrastructure.Messaging.dll;{bea4894f-6661-4352-9bc2-63ae1094575d}|Shared.IoC.dll;{CC6BAED2-307E-4730-81FA-EEBB0209F27D}|Adapters.DataAccess.SQL.Menu.dll;{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE}|Adapters.Interfaces.Menu.dll;{39D92546-1B84-465F-8B39-2C8637D5F5A3}|DataObjects.Menu.dll;{3DB0F14C-B509-4730-B069-EA475B0DC7E7}|Adapters.DataAccess.SQL.Security.dll;{7A640C78-320A-43EF-898E-711808D50449}|Adapters.Interfaces.Security.dll;{AD17AD01-E963-4BC0-A84A-68FB503A7AC5}|DataObjects.User.dll;{A745769E-618E-44A5-93D1-AABF06D7BED7}|Adapters.DataAccess.Web.Commons.dll;{10db4cd6-712b-4245-8892-5dccb0279ffa}|DataObjects.Managment.dll;{443e19fe-2823-43c8-afd5-5701172f4cd1}|Presentation.Commons.dll;{8b14f8e7-c8e1-473c-b97b-d8fef94571c3}|Presentation.Menu.dll;{0a1055f3-b6cb-40c2-b4c1-b1bfca1938f9}|Presentation.Security.dll;{80edb011-2538-4f5f-8702-335c0bb97274}|Presentation.Test.dll;{278752bb-5a91-45a1-aac0-a5458ada8165}|Presentation.Managment.dll;{12d85436-b559-4b2d-86f7-1d7d3c67c24c}|Adapters.Interfaces.Managment.dll;{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}|Adapters.DataAccess.DataTest.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_51128"
 		Debug.AspNetCompiler.PhysicalPath = "WebFinancial\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51128\"
@@ -117,6 +120,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFinancial", "http://loca
 		Enlist = Required
 		Svn.Uri = WebFinancial/
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.DataAccess.Managment", "Adapters.DataAccess.DataTest\Adapters.DataAccess.Managment.csproj", "{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Managment", "Presentation.Managment\Presentation.Managment.csproj", "{278752BB-5A91-45A1-AAC0-A5458ADA8165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.Interfaces.Managment", "Adapters.Interfaces.Managment\Adapters.Interfaces.Managment.csproj", "{12D85436-B559-4B2D-86F7-1D7D3C67C24C}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -204,6 +213,18 @@ Global
 		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278752BB-5A91-45A1-AAC0-A5458ADA8165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278752BB-5A91-45A1-AAC0-A5458ADA8165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278752BB-5A91-45A1-AAC0-A5458ADA8165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278752BB-5A91-45A1-AAC0-A5458ADA8165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D85436-B559-4B2D-86F7-1D7D3C67C24C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D85436-B559-4B2D-86F7-1D7D3C67C24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D85436-B559-4B2D-86F7-1D7D3C67C24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D85436-B559-4B2D-86F7-1D7D3C67C24C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -217,10 +238,12 @@ Global
 		{443E19FE-2823-43C8-AFD5-5701172F4CD1} = {98B3B751-8154-4ED8-ADCC-1BB081B71588}
 		{8B14F8E7-C8E1-473C-B97B-D8FEF94571C3} = {98B3B751-8154-4ED8-ADCC-1BB081B71588}
 		{0A1055F3-B6CB-40C2-B4C1-B1BFCA1938F9} = {98B3B751-8154-4ED8-ADCC-1BB081B71588}
+		{278752BB-5A91-45A1-AAC0-A5458ADA8165} = {98B3B751-8154-4ED8-ADCC-1BB081B71588}
 		{6FC5D806-F4D7-4319-BFE3-6BD53B5BEAD4} = {A6462F9F-990B-4458-8A42-60A045311A5D}
 		{CC6BAED2-307E-4730-81FA-EEBB0209F27D} = {7D4F1488-08CF-466F-B677-2F0F3E890CC6}
 		{3DB0F14C-B509-4730-B069-EA475B0DC7E7} = {7D4F1488-08CF-466F-B677-2F0F3E890CC6}
 		{A745769E-618E-44A5-93D1-AABF06D7BED7} = {7D4F1488-08CF-466F-B677-2F0F3E890CC6}
+		{3D4DA9A7-271C-48E0-90EF-3596A5CFA3D9} = {7D4F1488-08CF-466F-B677-2F0F3E890CC6}
 		{39D92546-1B84-465F-8B39-2C8637D5F5A3} = {E004611C-64EF-4A34-8A3A-E5AD6C4114C9}
 		{AD17AD01-E963-4BC0-A84A-68FB503A7AC5} = {E004611C-64EF-4A34-8A3A-E5AD6C4114C9}
 		{10DB4CD6-712B-4245-8892-5DCCB0279FFA} = {E004611C-64EF-4A34-8A3A-E5AD6C4114C9}
@@ -230,6 +253,7 @@ Global
 		{6D5B41C7-6F1E-4ABF-871F-95044ECE97FE} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
 		{7A640C78-320A-43EF-898E-711808D50449} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
 		{FB1DDFD2-3366-45E9-9819-DFD01FEEB754} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
+		{12D85436-B559-4B2D-86F7-1D7D3C67C24C} = {FC6944EE-C598-4ABB-9C35-4E6AB27483EB}
 		{A9D26373-99CE-4961-A869-9F3C56D7F7A1} = {99901616-CB85-4245-BAF5-7E6AA5256631}
 		{0EF15E8A-95EA-4E29-93C7-4A8A0A09F045} = {AE0926F9-A54D-4F03-8835-736F64C3FC94}
 	EndGlobalSection

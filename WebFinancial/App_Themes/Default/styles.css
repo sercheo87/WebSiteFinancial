@@ -393,6 +393,7 @@ div.accountInfo {
         -webkit-transition: all .25s ease-out;
         -moz-transition: all .25s ease-out;
         transition: all .25s ease-out;
+        z-index:99;
     }
 
     .row-offcanvas-right {

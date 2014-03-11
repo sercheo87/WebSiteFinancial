@@ -22,8 +22,8 @@
     Sys.Application.add_load(function () {
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'dvChart',
-                type: 'column',
+                renderTo: '<%=dvChart.ClientID%>',
+                type: '<%=TypeChart%>',
                 height: _heigth,
                 width: _width
             },
@@ -74,4 +74,4 @@
         });
     });
 </script>
-<asp:Panel runat="server" ID="dvChart" ClientIDMode="Static"></asp:Panel>
+<asp:Panel runat="server" ID="dvChart" ClientIDMode="AutoID"></asp:Panel>

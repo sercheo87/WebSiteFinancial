@@ -13,8 +13,9 @@ using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 using DataObjects.Managment;
 using System.Globalization;
+using Presentation.Managment;
 
-public partial class Views_UserControls_Consolidate_Product : System.Web.UI.UserControl
+public partial class Views_UserControls_Consolidate_Product : WebUserControl<SummaryPresenter>, ISummaryView
 {
     #region Clases Dto
     public class ChartExSeries
@@ -33,15 +34,6 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     #endregion
 
     #region Public Parameters Dto Product Collection
-    /// <summary>
-    /// Collection of data products
-    /// </summary>
-    public List<Product> ProductsCollection
-    {
-        get { return (List<Product>)ViewState["ProductsCollection"]; }
-        set { ViewState["ProductsCollection"] = value; }
-    }
-
     /// <summary>
     /// List product of type actives
     /// </summary>
@@ -103,6 +95,17 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         get { return (string)ViewState["AllowExport"]; }
         set { ViewState["AllowExport"] = value.ToString().ToLower(); }
     }
+    public string TypeChart
+    {
+        get
+        {
+            if (ViewState["TypeChart"] == null)
+                return "column";
+            else
+                return (string)ViewState["TypeChart"];
+        }
+        set { ViewState["TypeChart"] = value; }
+    }
     #endregion
 
     #region Public Label's
@@ -163,8 +166,18 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     }
     #endregion
 
+    #region Properties Private
+    /// <summary>
+    /// Collection of data products
+    /// </summary>
+    private List<Product> ProductsCollection
+    {
+        get { return (List<Product>)ViewState["ProductsCollection"]; }
+        set { ViewState["ProductsCollection"] = value; }
+    }
     protected List<ChartExSeries> chListSeries = new List<ChartExSeries>();
     protected List<ChartExDrillDown> chListDrill = new List<ChartExDrillDown>();
+    #endregion
 
     protected void Page_InitComplete(object sender, EventArgs e)
     {
@@ -172,7 +185,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Render_Chart();
+        Presenter.GetProducts();
     }
 
     protected void Render_Chart()
@@ -216,5 +229,11 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
 
         chListDrill.Add(_Drill);
         chListSeries.Add(chSerie);
+    }
+
+    public void ListProduct(IEnumerable<Product> dataProducts)
+    {
+        ProductsCollection = dataProducts.ToList();
+        Render_Chart();
     }
 }
