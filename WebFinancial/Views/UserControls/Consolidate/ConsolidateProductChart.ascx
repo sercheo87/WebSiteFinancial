@@ -8,6 +8,9 @@
             thousandsSep: '<%=GetSeparatorGroup %>'
         }
     });
+
+    hs.showCredits = false;
+    hs.addSlideshow({ useControls: false });
     var _heigth = '<%=HeigthChart %>',
         _width = '<%=WidthChart %>',
         _allowExport = '<%=AllowExport %>',
@@ -20,6 +23,7 @@
         _series = JSON.parse('<%=dtSeries %>'),
         _series_drilldown = JSON.parse('<%=dtDrillDownSeries %>'),
         chart;
+
     Sys.Application.add_load(function () {
         chart = new Highcharts.Chart({
             chart: {
