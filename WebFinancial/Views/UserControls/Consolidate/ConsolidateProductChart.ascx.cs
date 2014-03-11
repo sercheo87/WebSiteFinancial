@@ -12,9 +12,11 @@ using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 using DataObjects.Managment;
+using System.Globalization;
 
 public partial class Views_UserControls_Consolidate_Product : System.Web.UI.UserControl
 {
+    #region Clases Dto
     public class ChartExSeries
     {
         public string name { get; set; }
@@ -28,6 +30,7 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         public List<object> data { get; set; }
         public string id { get; set; }
     }
+    #endregion
 
     #region Public Parameters Dto Product Collection
     /// <summary>
@@ -65,6 +68,14 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     #endregion
 
     #region Public Properties Look&Feel
+    public string GetSeparatorDecimal
+    {
+        get { return NumberFormatInfo.CurrentInfo.NumberDecimalSeparator; }
+    }
+    public string GetSeparatorGroup
+    {
+        get { return NumberFormatInfo.CurrentInfo.NumberGroupSeparator; }
+    }
     public int HeigthChart
     {
         get
@@ -76,12 +87,12 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         }
         set { ViewState["HeigthChart"] = value; }
     }
-    public int WidthChart
+    public int? WidthChart
     {
         get
         {
             if (ViewState["WidthChart"] == null)
-                return 0;
+                return null;
             else
                 return (int)ViewState["WidthChart"];
         }
@@ -139,6 +150,17 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
         }
         set { ViewState["SubTitleChart"] = value.ToString(); }
     }
+    public string SeriesName
+    {
+        get
+        {
+            if (ViewState["SeriesName"] == null)
+                return string.Empty;
+            else
+                return (string)ViewState["SeriesName"];
+        }
+        set { ViewState["SeriesName"] = value.ToString(); }
+    }
     #endregion
 
     protected List<ChartExSeries> chListSeries = new List<ChartExSeries>();
@@ -151,49 +173,6 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     protected void Page_Load(object sender, EventArgs e)
     {
         Render_Chart();
-
-        /*Activas - Yaxis*/
-        //------------------------------------------------------------------
-        ChartExSeries chSerieActivas = new ChartExSeries();
-        chSerieActivas.name = "Activas";
-        chSerieActivas.y = 2500;
-        chSerieActivas.drilldown = "_DrillActivas";
-
-        ChartExDrillDown _DrillActivas = new ChartExDrillDown();
-        _DrillActivas.id = "_DrillActivas";
-        _DrillActivas.name = "_DrillActivas";
-        _DrillActivas.data = new List<object>();
-        _DrillActivas.data.Add(new List<object>() { "Cta: 11111111", 1000 });
-        _DrillActivas.data.Add(new List<object>() { "Cta: 22222222", 1000 });
-        _DrillActivas.data.Add(new List<object>() { "Cta: 33333333", 500 });
-
-        //chListDrill.Add(_DrillActivas);
-        //chListSeries.Add(chSerieActivas);
-        //------------------------------------------------------------------
-
-        /*Pasivas - Yaxis*/
-        //------------------------------------------------------------------       
-        ChartExSeries chSeriePasivas = new ChartExSeries();
-        chSeriePasivas.name = "Pasivas";
-        chSeriePasivas.y = 1200;
-        chSeriePasivas.drilldown = "_DrillPasivas";
-
-        ChartExDrillDown _DrillPasivas = new ChartExDrillDown();
-        _DrillPasivas.id = "_DrillPasivas";
-        _DrillPasivas.name = "_DrillPasivas";
-        _DrillPasivas.data = new List<object>();
-        _DrillPasivas.data.Add(new List<object>() { "Cta: 44444444", 1000 });
-        _DrillPasivas.data.Add(new List<object>() { "Cta: 55555555", 200 });
-
-        // chListDrill.Add(_DrillPasivas);
-        //chListSeries.Add(chSeriePasivas);
-        //------------------------------------------------------------------
-
-        //JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
-        //dtSeries = oSerializer1.Serialize(chListSeries);
-
-        //JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
-        //dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
     protected void Render_Chart()
@@ -216,9 +195,10 @@ public partial class Views_UserControls_Consolidate_Product : System.Web.UI.User
     {
         string lbProduct = (GetGlobalResourceObject("WebUILabels", string.Concat("Product_", TypesProduct)) == null ? string.Empty : GetGlobalResourceObject("WebUILabels", String.Concat("Product_", TypesProduct)).ToString());
         string lbDrill = String.Concat("_Drill_", TypesProduct);
+        double totalAmmount = collectionDto.Where(x => x.Type == TypesProduct).Sum(x => x.AmmountAvailable);
         ChartExSeries chSerie = new ChartExSeries();
         chSerie.name = lbProduct;
-        chSerie.y = collectionDto.Where(x => ProductTypeActives.Contains(TypesProduct)).Sum(x => x.AmmountAvailable);
+        chSerie.y = totalAmmount;
         chSerie.drilldown = lbDrill;
 
         ChartExDrillDown _Drill = new ChartExDrillDown();

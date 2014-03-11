@@ -74,10 +74,11 @@
                                 runat="server"
                                 HeigthChart="300"
                                 AllowExport="false"
+                                SeriesName="Producto"
                                 TitleXAxis="Productos"
                                 TitleYAxis="Valor"
                                 TitleChart="Posicion Consolidada"
-                                SubTitleChart="Detalle de Totalizado de Cuenas" />
+                                SubTitleChart="Detalle de Totalizado de Cuentas" />
                             <%-- <div class="container">
                                 <div class="carousel-caption">
                                     <h1>Example headline.</h1>

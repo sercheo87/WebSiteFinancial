@@ -2,68 +2,75 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <script type="text/javascript">
-    var _heigth = <%=HeigthChart %>,
-     _width = <%=WidthChart.ToString() %>,
-     _allowExport = <%=AllowExport %>,
-     _titleXAxis='<%=TitleXAxis %>',
-     _titleYAxis='<%=TitleYAxis %>',
-     _titleChart='<%=TitleChart %>',
-     _subTitleChart='<%=SubTitleChart %>';
-    var chart;
+    Highcharts.setOptions({
+        lang: {
+            decimalPoint: '<%=GetSeparatorDecimal %>',
+            thousandsSep: '<%=GetSeparatorGroup %>'
+        }
+    });
+    var _heigth = '<%=HeigthChart %>',
+        _width = '<%=WidthChart %>',
+        _allowExport = '<%=AllowExport %>',
+        _titleXAxis = '<%=TitleXAxis %>',
+        _titleYAxis = '<%=TitleYAxis %>',
+        _titleChart = '<%=TitleChart %>',
+        _seriesName = '<%=SeriesName %>',
+        _subTitleChart = '<%=SubTitleChart %>',
+        _series = JSON.parse('<%=dtSeries %>'),
+        _series_drilldown = JSON.parse('<%=dtDrillDownSeries %>'),
+        chart;
     Sys.Application.add_load(function () {
-        $(document).ready(function () {
-            chart = new Highcharts.Chart({
-                chart: {
-                    renderTo:'dvChart',
-                    type: 'column',
-                    height: _heigth,
-                    width: _width
-                },
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'dvChart',
+                type: 'column',
+                height: _heigth,
+                width: _width
+            },
+            title: {
+                text: _titleChart
+            },
+            subtitle: {
+                text: _subTitleChart
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: {
                 title: {
-                    text: _titleChart
+                    text: _titleXAxis
                 },
-                subtitle: {
-                    text: _subTitleChart
-                },
-                credits: {
-                    enabled: false
-                },
-                xAxis: {
-                    title: {
-                        text: _titleXAxis
-                    },
-                    type: 'category'
-                },
-                yAxis: {
-                    title: {
-                        text: _titleYAxis
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: _titleYAxis
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: 'USD $ {point.y:,.2f}'
                     }
-                },
-                legend: {
-                    enabled: false
-                },
-                plotOptions: {
-                    series: {
-                        borderWidth: 0,
-                        dataLabels: {
-                            enabled: true,
-                            format: 'USD $ {point.y:.2f}'
-                        }
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>USD {point.y:.2f}</b> of total<br/>'
-                },
-                series: [{
-                    name: 'Brands',
-                    colorByPoint: true,
-                    data: <%=dtSeries %>
-                    }],
-                drilldown: {
-                    series: <%=dtDrillDownSeries %>
-                    }
-            });
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>USD {point.y:,.2f}</b><br/>'
+            },
+            series: [{
+                name: _seriesName,
+                colorByPoint: true,
+                data: _series
+            }],
+            drilldown: {
+                series: _series_drilldown
+            }
         });
     });
 </script>
