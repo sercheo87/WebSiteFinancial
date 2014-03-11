@@ -24,6 +24,7 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         //public List<object> data { get; set; }
         public string drilldown { get; set; }
         public object y { get; set; }
+        public string msg { get; set; }
     }
     public class ChartExDrillDown
     {
@@ -209,6 +210,7 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (ShowMovementsAccount)
             Presenter.GetMovements();
         else
@@ -238,6 +240,7 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
             ChartExSeries chSerie = new ChartExSeries();
             chSerie.name = item.Date.ToShortDateString();
             chSerie.y = item.AmmountTransfer;
+            chSerie.msg = item.Description;
             chListSeries.Add(chSerie);
         }
         JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
@@ -245,11 +248,6 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
 
         JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
         dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
-    }
-
-    protected void CreateSeriesLine(List<ProductMovements> collectionDto)
-    {
-
     }
 
     protected void CreateSeries(int TypesProduct, List<Product> collectionDto)
@@ -261,7 +259,6 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         chSerie.name = lbProduct;
         chSerie.y = totalAmmount;
         chSerie.drilldown = lbDrill;
-
         ChartExDrillDown _Drill = new ChartExDrillDown();
         _Drill.id = lbDrill;
         _Drill.name = lbDrill;
@@ -284,7 +281,6 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         ProductsCollection = dataProducts.ToList();
         Render_Chart_Default();
     }
-
 
     public void ListMovementsByAccount(IEnumerable<ProductMovements> productsMovements)
     {

@@ -5,18 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <script type="text/javascript">
 
-        Highcharts.setOptions({
-            lang: {
-                decimalPoint: '.',
-                thousandsSep: ','
-            }
-        });
-
-        hs.showCredits = false;
-        hs.addSlideshow({ useControls: false });
-    </script>
     <section>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -50,8 +39,8 @@
                         TypeXAxis="category"
                         ShowMovementsAccount="true"
                         TypeChart="line"
-                        SeriesName="Producto"
-                        TitleXAxis="Productos"
+                        SeriesName="Fecha"
+                        TitleXAxis="Fechas"
                         TitleYAxis="Valor"
                         TitleChart="Movimientos de Transacciones"
                         PanelNameChart="id_pnl_chart2"

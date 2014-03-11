@@ -11,5 +11,7 @@ namespace DataObjects.Managment
     {
         public DateTime Date { get; set; }
         public double AmmountTransfer { get; set; }
+        public string Description { get; set; }
+        public string TypeTransfer { get; set; }
     }
 }

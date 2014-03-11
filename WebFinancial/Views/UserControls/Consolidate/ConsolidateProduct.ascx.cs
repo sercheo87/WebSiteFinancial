@@ -98,7 +98,7 @@ public partial class Views_UserControls_ConsolidateProduct : WebUserControl<Summ
             HtmlGenericControl lbEtqDt = new HtmlGenericControl("dt");
             lbEtqDl.Controls.Add(lbEtqDt);
             HtmlGenericControl hgIcon = new HtmlGenericControl("i");
-            hgIcon.Attributes["class"] = "fa fa-bars";
+            hgIcon.Attributes["class"] = "fa fa-bars hidden-xs";
             lbEtqDt.Controls.Add(hgIcon);
             //lbEtqDt.Attributes["class"] = "text-right";
             Literal ltEtiqueta = new Literal();
