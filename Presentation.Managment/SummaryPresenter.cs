@@ -20,5 +20,10 @@ namespace Presentation.Managment
         {
             View.ListProduct(_adapter.GetProducts());
         }
+
+        public void GetMovements()
+        {
+            View.ListMovementsByAccount(_adapter.GetMovements());
+        }
     }
 }

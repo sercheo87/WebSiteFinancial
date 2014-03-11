@@ -14,6 +14,7 @@
         _titleXAxis = '<%=TitleXAxis %>',
         _titleYAxis = '<%=TitleYAxis %>',
         _titleChart = '<%=TitleChart %>',
+        _xAxisType = '<%=TypeXAxis%>',
         _seriesName = '<%=SeriesName %>',
         _subTitleChart = '<%=SubTitleChart %>',
         _series = JSON.parse('<%=dtSeries %>'),
@@ -40,33 +41,69 @@
                 title: {
                     text: _titleXAxis
                 },
-                type: 'category'
+                type: _xAxisType,
+                //tickInterval: 7 * 24 * 3600 * 1000, // one week
+                tickWidth: 0,
+                gridLineWidth: 1
             },
             yAxis: {
                 title: {
                     text: _titleYAxis
-                }
+                },
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: 16,
+                    formatter: function () {
+                        return Highcharts.numberFormat(this.value, 0);
+                    }
+                },
+                showFirstLabel: false
             },
             legend: {
                 enabled: false
             },
             plotOptions: {
                 series: {
+                    cursor: 'pointer', point: {
+                        events: {
+                            click: function () {
+                                hs.htmlExpand(null, {
+                                    pageOrigin: {
+                                        x: this.pageX,
+                                        y: this.pageY
+                                    },
+                                    headingText: this.series.name,
+                                    maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' + this.y + ' visits',
+                                    width: 200
+                                });
+                            }
+                        }
+                    },
                     borderWidth: 0,
                     dataLabels: {
                         enabled: true,
                         format: 'USD $ {point.y:,.2f}'
+                    },
+                    marker: {
+                        lineWidth: 1
                     }
                 }
             },
             tooltip: {
+                shared: true,
+                crosshairs: true,
                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
                 pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>USD {point.y:,.2f}</b><br/>'
             },
             series: [{
                 name: _seriesName,
                 colorByPoint: true,
-                data: _series
+                data: _series,
+                lineWidth: 4,
+                marker: {
+                    radius: 4
+                }
             }],
             drilldown: {
                 series: _series_drilldown

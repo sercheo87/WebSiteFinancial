@@ -106,6 +106,28 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         }
         set { ViewState["TypeChart"] = value; }
     }
+    public string TypeXAxis
+    {
+        get
+        {
+            if (ViewState["TypeXAxis"] == null)
+                return "category";
+            else
+                return (string)ViewState["TypeXAxis"];
+        }
+        set { ViewState["TypeXAxis"] = value; }
+    }
+    public bool ShowMovementsAccount
+    {
+        get
+        {
+            if (ViewState["ShowMovementsAccount"] == null)
+                return false;
+            else
+                return (bool)ViewState["ShowMovementsAccount"];
+        }
+        set { ViewState["ShowMovementsAccount"] = value; }
+    }
     #endregion
 
     #region Public Label's
@@ -167,13 +189,15 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
     #endregion
 
     #region Properties Private
-    /// <summary>
-    /// Collection of data products
-    /// </summary>
     private List<Product> ProductsCollection
     {
         get { return (List<Product>)ViewState["ProductsCollection"]; }
         set { ViewState["ProductsCollection"] = value; }
+    }
+    private List<ProductMovements> ProductMovementsCollection
+    {
+        get { return (List<ProductMovements>)ViewState["ProductMovementsCollection"]; }
+        set { ViewState["ProductMovementsCollection"] = value; }
     }
     protected List<ChartExSeries> chListSeries = new List<ChartExSeries>();
     protected List<ChartExDrillDown> chListDrill = new List<ChartExDrillDown>();
@@ -185,10 +209,13 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Presenter.GetProducts();
+        if (ShowMovementsAccount)
+            Presenter.GetMovements();
+        else
+            Presenter.GetProducts();
     }
 
-    protected void Render_Chart()
+    protected void Render_Chart_Default()
     {
         var obj = ProductsCollection.GroupBy(g => g.Type);
         foreach (var typeProduct in obj)
@@ -202,6 +229,27 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
 
         JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
         dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
+    }
+
+    protected void Render_Chart_Line()
+    {
+        foreach (ProductMovements item in ProductMovementsCollection)
+        {
+            ChartExSeries chSerie = new ChartExSeries();
+            chSerie.name = item.Date.ToShortDateString();
+            chSerie.y = item.AmmountTransfer;
+            chListSeries.Add(chSerie);
+        }
+        JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
+        dtSeries = oSerializer1.Serialize(chListSeries);
+
+        JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
+        dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
+    }
+
+    protected void CreateSeriesLine(List<ProductMovements> collectionDto)
+    {
+
     }
 
     protected void CreateSeries(int TypesProduct, List<Product> collectionDto)
@@ -234,6 +282,13 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
     public void ListProduct(IEnumerable<Product> dataProducts)
     {
         ProductsCollection = dataProducts.ToList();
-        Render_Chart();
+        Render_Chart_Default();
+    }
+
+
+    public void ListMovementsByAccount(IEnumerable<ProductMovements> productsMovements)
+    {
+        ProductMovementsCollection = productsMovements.ToList();
+        Render_Chart_Line();
     }
 }

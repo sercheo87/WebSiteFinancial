@@ -11,5 +11,6 @@ namespace Presentation.Managment
     public interface ISummaryView : IControlView
     {
         void ListProduct(IEnumerable<Product> dataProducts);
+        void ListMovementsByAccount(IEnumerable<ProductMovements> productsMovements);
     }
 }

@@ -74,6 +74,7 @@
                                 runat="server"
                                 HeigthChart="300"
                                 AllowExport="false"
+                                TypeXAxis="datetime"
                                 SeriesName="Producto"
                                 TitleXAxis="Productos"
                                 TitleYAxis="Valor"

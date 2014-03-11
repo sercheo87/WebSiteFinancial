@@ -20,5 +20,15 @@ namespace Adapters.DataAccess.Managment
 
             return data;
         }
+        public IEnumerable<ProductMovements> GetMovements()
+        {
+            List<ProductMovements> data = new List<ProductMovements>();
+            data.Add(new ProductMovements() { Date = DateTime.Parse("3/9/2014"), AmmountTransfer = 1200 });
+            data.Add(new ProductMovements() { Date = DateTime.Parse("5/10/2014"), AmmountTransfer = 200 });
+            data.Add(new ProductMovements() { Date = DateTime.Parse("10/10/2014"), AmmountTransfer = 12 });
+            data.Add(new ProductMovements() { Date = DateTime.Parse("13/12/2014"), AmmountTransfer = 55.32 });
+            data.Add(new ProductMovements() { Date = DateTime.Parse("23/12/2014"), AmmountTransfer = 0.25 });
+            return data;
+        }
     }
 }

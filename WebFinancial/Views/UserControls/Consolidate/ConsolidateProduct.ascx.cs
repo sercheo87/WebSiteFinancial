@@ -201,4 +201,10 @@ public partial class Views_UserControls_ConsolidateProduct : WebUserControl<Summ
         GetAllSummaryProduts();
         pnlParent.Controls.Add(CreateSectionTotal());
     }
+
+
+    public void ListMovementsByAccount(IEnumerable<ProductMovements> productsMovements)
+    {
+        throw new NotImplementedException();
+    }
 }
