@@ -10,11 +10,13 @@ public partial class Default : WebView<object>
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        chChartColumnGroup.ProductTypeActives = new List<int>() { 3, 4 };
+        chChartColumnGroup.ProductTypePasives = new List<int>() { 7 };
        
         consolidateProduct.ProductTypeActives = new List<int>() { 3, 4 };
         consolidateProduct.ProductTypePasives = new List<int>() { 7 };
 
-        chConsolidate2.ProductTypeActives = new List<int>() { 3, 4 };
-        chConsolidate2.ProductTypePasives = new List<int>() { 7 };
+        chChartLineMovement.ProductTypeActives = new List<int>() { 3, 4 };
+        chChartLineMovement.ProductTypePasives = new List<int>() { 7 };
     }
 }

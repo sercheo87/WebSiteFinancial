@@ -5,6 +5,18 @@
 </asp:Content>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <script type="text/javascript">
+
+        Highcharts.setOptions({
+            lang: {
+                decimalPoint: '.',
+                thousandsSep: ','
+            }
+        });
+
+        hs.showCredits = false;
+        hs.addSlideshow({ useControls: false });
+    </script>
     <section>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -17,18 +29,34 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="home">
-                <uc:ConsolidateProductChart ID="chConsolidate2"
-                    runat="server"
-                    HeigthChart="300"
-                    AllowExport="false"
-                    TypeXAxis="category"
-                    ShowMovementsAccount="true"
-                    TypeChart="line"
-                    SeriesName="Producto"
-                    TitleXAxis="Productos"
-                    TitleYAxis="Valor"
-                    TitleChart="Posicion Consolidada"
-                    SubTitleChart="Detalle de Totalizado de Cuentas" />
+                <asp:Panel runat="server" ID="chart1">
+                    <uc:ConsolidateProductChart ID="chChartColumnGroup"
+                        runat="server"
+                        HeigthChart="300"
+                        AllowExport="false"
+                        TypeXAxis="category"
+                        SeriesName="Producto"
+                        TitleXAxis="Productos"
+                        TitleYAxis="Valor"
+                        TitleChart="Posicion Consolidada"
+                        PanelNameChart="id_pnl_chart1"
+                        SubTitleChart="Detalle de Totalizado de Cuentas" />
+                </asp:Panel>
+                <asp:Panel runat="server" ID="Panel1">
+                    <uc:ConsolidateProductChart ID="chChartLineMovement"
+                        runat="server"
+                        HeigthChart="300"
+                        AllowExport="false"
+                        TypeXAxis="category"
+                        ShowMovementsAccount="true"
+                        TypeChart="line"
+                        SeriesName="Producto"
+                        TitleXAxis="Productos"
+                        TitleYAxis="Valor"
+                        TitleChart="Movimientos de Transacciones"
+                        PanelNameChart="id_pnl_chart2"
+                        SubTitleChart="Detalle de las transacciones por Cuentas" />
+                </asp:Panel>
                 <p>dddd</p>
             </div>
             <div class="tab-pane" id="profile">tabulador2</div>
