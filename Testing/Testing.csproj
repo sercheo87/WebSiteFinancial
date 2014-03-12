@@ -43,7 +43,11 @@
       <HintPath>..\packages\NUnit.Mocks.2.6.3\lib\nunit.mocks.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\References\Rhino.Mocks-3.6-Build-21\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\StructureMap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,9 +59,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvaluatedNavigationTest.cs" />
+    <Compile Include="GetProductsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adapters.DataAccess.DataTest\Adapters.DataAccess.Managment.csproj">
+      <Project>{3d4da9a7-271c-48e0-90ef-3596a5cfa3d9}</Project>
+      <Name>Adapters.DataAccess.Managment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adapters.Interfaces.Managment\Adapters.Interfaces.Managment.csproj">
+      <Project>{12d85436-b559-4b2d-86f7-1d7d3c67c24c}</Project>
+      <Name>Adapters.Interfaces.Managment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataObjects.Managment\DataObjects.Managment.csproj">
       <Project>{10db4cd6-712b-4245-8892-5dccb0279ffa}</Project>
       <Name>DataObjects.Managment</Name>
@@ -65,6 +78,10 @@
     <ProjectReference Include="..\DataObjects.User\DataObjects.User.csproj">
       <Project>{ad17ad01-e963-4bc0-a84a-68fb503a7ac5}</Project>
       <Name>DataObjects.User</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation.Managment\Presentation.Managment.csproj">
+      <Project>{278752bb-5a91-45a1-aac0-a5458ada8165}</Project>
+      <Name>Presentation.Managment</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared.Commons\Shared.Commons.csproj">
       <Project>{4738c484-3a15-4cfd-b98c-2cfe71fdbb1b}</Project>
