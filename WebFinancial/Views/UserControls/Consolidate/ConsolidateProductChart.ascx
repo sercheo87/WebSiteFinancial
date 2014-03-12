@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ConsolidateProductChart.ascx.cs" Inherits="Views_UserControls_Consolidate_Product" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ConsolidateProductChart.ascx.cs" Inherits="Views_UserControls_Consolidate_Product_Chart" %>
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <script type="text/javascript">
@@ -17,7 +17,7 @@
                            [1, 'rgb(240, 240, 255)']
                         ]
                     },
-                    borderWidth: 1,
+                    borderWidth: 0,
                     plotBackgroundColor: 'rgba(255, 255, 255, .9)',
                     plotShadow: true,
                     plotBorderWidth: 1
@@ -100,7 +100,7 @@
             };
             //APPLY THEME
             Highcharts.setOptions(myTheme);
-            var $reporting = $('#reporting');
+
             Highcharts.Data.prototype.dateFormats['m/d/Y'] = {
                 regex: '^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2})$',
                 parser: function (match) {
@@ -121,8 +121,11 @@
                     hideOnMouseOut: false
                 }
             });
+            createChart();
+        });
+        function createChart() {
             var _heigth = '<%=HeigthChart %>',
-                _width = '<%=WidthChart %>',
+               // _width = '<%=WidthChart %>',
                 _allowExport = '<%=AllowExport %>',
                 _titleXAxis = '<%=TitleXAxis %>',
                 _titleYAxis = '<%=TitleYAxis %>',
@@ -131,16 +134,14 @@
                 _seriesName = '<%=SeriesName %>',
                 _subTitleChart = '<%=SubTitleChart %>',
                 _series = JSON.parse('<%=dtSeries %>'),
-                _series_drilldown = JSON.parse('<%=dtDrillDownSeries %>'),
-                chart;
-            console.log("series");
-            console.log(_series);
-            chart = new Highcharts.Chart({
+                _series_drilldown = JSON.parse('<%=dtDrillDownSeries %>');
+            var <%=NameChart%>_chart;
+            <%=NameChart%>_chart = new Highcharts.Chart({
                 chart: {
                     renderTo: '<%=dvChart.ClientID%>',
                     type: '<%=TypeChart%>',
                     height: _heigth,
-                    width: _width,
+                    // width: _width,
                     zoomType: 'xy'
                 },
                 title: {
@@ -255,7 +256,7 @@
                     series: _series_drilldown
                 }
             });
-        });
+        }
     });
 </script>
 <asp:Panel runat="server" ID="dvChart" ClientIDMode="AutoID"></asp:Panel>

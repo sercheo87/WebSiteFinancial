@@ -15,7 +15,7 @@ using DataObjects.Managment;
 using System.Globalization;
 using Presentation.Managment;
 
-public partial class Views_UserControls_Consolidate_Product : WebUserControl<SummaryPresenter>, ISummaryView
+public partial class Views_UserControls_Consolidate_Product_Chart : WebUserControl<SummaryPresenter>, ISummaryView
 {
     #region Clases Dto
     public class ChartExSeries
@@ -128,6 +128,17 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
                 return (bool)ViewState["ShowMovementsAccount"];
         }
         set { ViewState["ShowMovementsAccount"] = value; }
+    }
+    public string NameChart
+    {
+        get
+        {
+            if (ViewState["NameChart"] == null)
+                return "NameChart";
+            else
+                return (string)ViewState["NameChart"];
+        }
+        set { ViewState["NameChart"] = value; }
     }
     #endregion
 
@@ -276,6 +287,7 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         chListSeries.Add(chSerie);
     }
 
+    #region Interface
     public void ListProduct(IEnumerable<Product> dataProducts)
     {
         ProductsCollection = dataProducts.ToList();
@@ -287,4 +299,5 @@ public partial class Views_UserControls_Consolidate_Product : WebUserControl<Sum
         ProductMovementsCollection = productsMovements.ToList();
         Render_Chart_Line();
     }
+    #endregion
 }

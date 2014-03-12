@@ -66,6 +66,7 @@ public partial class Views_UserControls_ConsolidateProduct : WebUserControl<Summ
         pnlControlItem.ShowHeader = true;
         pnlControlItem.IdParentContainer = pnlParent.ClientID;
         pnlControlItem.TypePanel = Views_UserControls_Panel.TypePanelList.primary;
+        pnlControlItem.EnableCollapse = true;
 
         //Header
         HtmlGenericControl itemIcon = new HtmlGenericControl("i");
@@ -194,7 +195,7 @@ public partial class Views_UserControls_ConsolidateProduct : WebUserControl<Summ
         pnlControlItem.PlaceHolderContent.Controls.Add(rpBodyContent);
         return pnlControlItem;
     }
-
+    #region Interface
     public void ListProduct(IEnumerable<Product> dataProducts)
     {
         ProductsCollection = dataProducts.ToList();
@@ -207,4 +208,5 @@ public partial class Views_UserControls_ConsolidateProduct : WebUserControl<Summ
     {
         throw new NotImplementedException();
     }
+    #endregion
 }
