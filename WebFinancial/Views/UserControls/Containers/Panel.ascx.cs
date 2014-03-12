@@ -32,6 +32,13 @@ public partial class Views_UserControls_Panel : System.Web.UI.UserControl
         set { _showHeader = value; }
     }
 
+    private bool _enableCollapse = false;
+    public bool EnableCollapse
+    {
+        get { return _enableCollapse; }
+        set { _enableCollapse = value; }
+    }
+
     private string _IdParentContainer = string.Empty;
     public string IdParentContainer
     {
@@ -89,8 +96,11 @@ public partial class Views_UserControls_Panel : System.Web.UI.UserControl
         pnHeaderPanel.Visible = _showHeader;
         if (_showHeader)
         {
-            pnHeaderPanel.Attributes.Add("data-toggle", "collapse");
-            pnCollapse.CssClass = "collapse";
+            if (_enableCollapse)
+            {
+                pnHeaderPanel.Attributes.Add("data-toggle", "collapse");
+                pnCollapse.CssClass = "collapse";
+            }
         }
     }
 }
