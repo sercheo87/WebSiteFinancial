@@ -58,6 +58,7 @@
     <Compile Include="MemoryBag.cs" />
     <Compile Include="NavigationUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilsConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Adapters.Interfaces.Commons\Adapters.Interfaces.Commons.csproj">
