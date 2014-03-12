@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class Views_UserControls_Panel : System.Web.UI.UserControl
@@ -93,11 +94,17 @@ public partial class Views_UserControls_Panel : System.Web.UI.UserControl
         pnHeaderPanel.Attributes.Add("data-target", "#" + pnCollapse.ClientID);
         pnlCtrlPanel.CssClass = "panel panel-" + TypePanel.ToString().ToLower();
 
+        HtmlGenericControl sp = new HtmlGenericControl("span");
+        sp.Attributes.Add("class", "panel-title");
+        sp.InnerText = _title;
+        ltTitle.Controls.Add(sp);
+
         pnHeaderPanel.Visible = _showHeader;
         if (_showHeader)
         {
             if (_enableCollapse)
             {
+                sp.Attributes.Add("class", "panel-title accordion-toggle");
                 pnHeaderPanel.Attributes.Add("data-toggle", "collapse");
                 pnCollapse.CssClass = "collapse";
             }
