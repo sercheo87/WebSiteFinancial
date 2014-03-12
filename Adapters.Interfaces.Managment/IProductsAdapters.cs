@@ -10,6 +10,10 @@ namespace Adapters.Interfaces.Managment
     public interface IProductsAdapters
     {
         IEnumerable<Product> GetProducts();
+        IEnumerable<Product> GetProducts(int ProductType);
+        IEnumerable<Product> GetProducts(int[] ProductType);
+        IEnumerable<Product> GetProducts(int ProductType, int CurrencyType);
+        IEnumerable<Product> GetProducts(int[] ProductType, int CurrencyType);
         IEnumerable<ProductMovements> GetMovements();
     }
 }
