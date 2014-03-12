@@ -84,8 +84,6 @@ public partial class Views_Transfers_Transfer_Demo : WebView<object>
 
     private void Grid_Events(object sender, GridEventArgs e)
     {
-
-        string o = "";
     }
 
     protected void gvGrid_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
