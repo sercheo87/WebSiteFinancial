@@ -4,9 +4,9 @@
 <script type="text/javascript">
     Sys.Application.add_load(function () {
         $(function () {
+            var optionper = JSON.parse('<%=GetOptionsChart%>');
             createChart();
         });
-
         function createChart() {
             var _heigth = '<%=HeigthChart %>',
                 _width = $('#temdiv').width(),//'<%=WidthChart %>',
@@ -19,12 +19,20 @@
                 _subTitleChart = '<%=SubTitleChart %>',
                 _series = JSON.parse('<%=dtSeries %>'),
                 _series_drilldown = JSON.parse('<%=dtDrillDownSeries %>');
-            var <%=NameChart%>_chart;
-
+            
             //var $reporting = $('#reporting');
 
+            var  <%=NameChart%>_chart_per = {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }
+                }
+            };
 
-            <%=NameChart%>_chart = new Highcharts.Chart({
+            var <%=NameChart%>_chart_opt = {
                 chart: {
                     renderTo: '<%=dvChart.ClientID%>',
                     type: '<%=TypeChart%>',
@@ -92,7 +100,6 @@
                         },
                         borderWidth: 0,
                         dataLabels: {
-                            enabled: true,
                             format: 'USD $ {point.y:,.2f}'
                         },
                         marker: { lineWidth: 1 }
@@ -110,7 +117,10 @@
                 drilldown: {
                     series: _series_drilldown
                 }
-            });
+            };
+
+            <%=NameChart%>_chart_opt = jQuery.extend(true, {}, <%=NameChart%>_chart_per, <%=NameChart%>_chart_opt);
+            var  <%=NameChart%>_chart = new Highcharts.Chart( <%=NameChart%>_chart_opt);
         }
     });
 </script>

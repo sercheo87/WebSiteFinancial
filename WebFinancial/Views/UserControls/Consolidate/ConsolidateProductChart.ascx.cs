@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using DataObjects.Managment;
 using System.Globalization;
 using Presentation.Managment;
+using System.ComponentModel;
 
 public partial class Views_UserControls_Consolidate_Product_Chart : WebUserControl<SummaryPresenter>, ISummaryView
 {
@@ -34,34 +35,15 @@ public partial class Views_UserControls_Consolidate_Product_Chart : WebUserContr
     }
     #endregion
 
-    #region Public Parameters Dto Product Collection
-    /// <summary>
-    /// List product of type actives
-    /// </summary>
-    public List<int> ProductTypeActives
-    {
-        get { return (List<int>)ViewState["ProductTypeActives"]; }
-        set { ViewState["ProductTypeActives"] = value; }
-    }
-
-    /// <summary>
-    /// List product of type pasives
-    /// </summary>
-    public List<int> ProductTypePasives
-    {
-        get { return (List<int>)ViewState["ProductTypePasives"]; }
-        set { ViewState["ProductTypePasives"] = value; }
-    }
-    #endregion
-
     #region Public Parameters Data
     public string dtSeries { get; set; }
     public string dtDrillDownSeries { get; set; }
     public string Xaxis { get; set; }
+    DotNet.Highcharts.Options.PlotOptions _optionsChart= new PlotOptions();
     public DotNet.Highcharts.Options.PlotOptions OptionsChart
     {
-        get { }
-        set { }
+        get { return _optionsChart; }
+        set { _optionsChart = value; }
     }
     #endregion
 
@@ -211,6 +193,11 @@ public partial class Views_UserControls_Consolidate_Product_Chart : WebUserContr
     #endregion
 
     #region Properties Private
+    protected string GetOptionsChart
+    {
+        get 
+        { return new JavaScriptSerializer().Serialize(_optionsChart); }
+    }
     private List<Product> ProductsCollection
     {
         get { return (List<Product>)ViewState["ProductsCollection"]; }
