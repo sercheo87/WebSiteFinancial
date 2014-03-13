@@ -44,6 +44,7 @@
                     <%--Site Scripts--%>
                     <asp:ScriptReference Path="~/app/validations.js" />
                     <asp:ScriptReference Path="~/app/actions-general.js" />
+                    <asp:ScriptReference Path="~/app/chart-preferences.js" />
                 </Scripts>
             </asp:ScriptManager>
             <asp:ContentPlaceHolder ID="MasterMainContent" runat="server" />

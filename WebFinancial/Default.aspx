@@ -9,38 +9,42 @@
         <!-- Nav tabs -->
         <ul id="mytab" class="nav nav-tabs">
             <li class="active">
-                <asp:LinkButton runat="server" ID="btTam1" href="#home" Text="Ayuda" data-toggle="tab">Consolidado</asp:LinkButton>
+                <asp:LinkButton runat="server" ID="btTam1" href="#pnlIdHome" Text="Ayuda" data-toggle="tab">Consolidado</asp:LinkButton>
             </li>
             <li>
-                <asp:LinkButton runat="server" href="#profile" ID="LinkButton1" data-toggle="tab" Text="Ayuda" OnClick="LinkButton1_Click">Movimientos de Cuenta</asp:LinkButton>
+                <asp:LinkButton runat="server" href="#pnlIdProfile" ID="LinkButton1" data-toggle="tab" Text="Ayuda">Movimientos de Cuenta</asp:LinkButton>
             </li>
             <li><a href="#messages" data-toggle="tab">Messages</a></li>
             <li><a href="#settings" data-toggle="tab">Settings</a></li>
         </ul>
         <!-- Tab panels -->
         <div class="tab-content">
-            <div class="tab-pane active" id="home">
+            <div class="tab-pane active" id="pnlIdHome">
 
                 <%-- Posicion Consolidada --%>
                 <asp:Panel runat="server" ID="chart1">
-                    <uc:ConsolidateProductChart ID="chChartColumnGroup"
-                        runat="server"
-                        HeigthChart="300"
-                        AllowExport="false"
-                        TypeXAxis="category"
-                        SeriesName="Producto"
-                        TitleXAxis="Productos"
-                        TitleYAxis="Valor"
-                        NameChart="chardemo1"
-                        TitleChart="Posicion Consolidada"
-                        PanelNameChart="id_pnl_chart1"
-                        SubTitleChart="Detalle de Totalizado de Cuentas" />
-
+                    <uc:PanelControl runat="server" ShowHeader="false">
+                        <ContentBody>
+                            <uc:ConsolidateProductChart ID="chChartColumnGroup"
+                                ContainerId="pnlIdHome"
+                                runat="server"
+                                HeigthChart="300"
+                                AllowExport="false"
+                                TypeXAxis="category"
+                                SeriesName="Producto"
+                                TitleXAxis="Productos"
+                                TitleYAxis="Valor"
+                                NameChart="chardemo1"
+                                TitleChart="Posicion Consolidada"
+                                PanelNameChart="id_pnl_chart1"
+                                SubTitleChart="Detalle de Totalizado de Cuentas" />
+                        </ContentBody>
+                    </uc:PanelControl>
                 </asp:Panel>
             </div>
-            <div class="tab-pane" id="profile">
+            <div class="tab-pane" id="pnlIdProfile">
                 <%-- Movimientos por Cuenta --%>
-                <uc:PanelControl ID="PanelControl1" runat="server" ShowHeader="false">
+                <uc:PanelControl runat="server" ShowHeader="false">
                     <ContentBody>
                         <div class="form-horizontal">
                             <div class="col-md-6">
@@ -61,14 +65,15 @@
                             </div>
                         </div>
                         <uc:ConsolidateProductChart ID="chChartLineMovement" EnableViewState="true" ViewStateMode="Enabled"
+                            ContainerId="pnlIdHome"
                             runat="server"
                             HeigthChart="300"
                             AllowExport="false"
                             TypeXAxis="category"
                             ShowMovementsAccount="true"
                             TypeChart="line"
-                            SeriesName="Fecha"
-                            TitleXAxis="Fechas"
+                            SeriesName="Transacciones por Fecha"
+                            TitleXAxis="Transacciones"
                             TitleYAxis="Valor"
                             TitleChart="Movimientos de Transacciones"
                             PanelNameChart="home"

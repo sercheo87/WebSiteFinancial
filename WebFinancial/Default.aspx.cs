@@ -19,8 +19,4 @@ public partial class Default : WebView<object>
         chChartLineMovement.ProductTypeActives = new List<int>() { 3, 4 };
         chChartLineMovement.ProductTypePasives = new List<int>() { 7 };
     }
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        PanelControl1.Visible = true;
-    }
 }

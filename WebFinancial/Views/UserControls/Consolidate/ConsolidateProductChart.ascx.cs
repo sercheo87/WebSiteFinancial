@@ -58,6 +58,11 @@ public partial class Views_UserControls_Consolidate_Product_Chart : WebUserContr
     public string dtSeries { get; set; }
     public string dtDrillDownSeries { get; set; }
     public string Xaxis { get; set; }
+    public DotNet.Highcharts.Options.PlotOptions OptionsChart
+    {
+        get { }
+        set { }
+    }
     #endregion
 
     #region Public Properties Look&Feel
@@ -139,6 +144,11 @@ public partial class Views_UserControls_Consolidate_Product_Chart : WebUserContr
                 return (string)ViewState["NameChart"];
         }
         set { ViewState["NameChart"] = value; }
+    }
+    public string ContainerId
+    {
+        get { return (string)ViewState["ContainerId"]; }
+        set { ViewState["ContainerId"] = value; }
     }
     #endregion
 
@@ -264,7 +274,7 @@ public partial class Views_UserControls_Consolidate_Product_Chart : WebUserContr
     protected void CreateSeries(int TypesProduct, List<Product> collectionDto)
     {
         string lbProduct = (GetGlobalResourceObject("WebUILabels", string.Concat("Product_", TypesProduct)) == null ? string.Empty : GetGlobalResourceObject("WebUILabels", String.Concat("Product_", TypesProduct)).ToString());
-        string lbDrill = String.Concat("_Drill_", TypesProduct);
+        string lbDrill = String.Concat("Cuentas", "");
         double totalAmmount = collectionDto.Where(x => x.Type == TypesProduct).Sum(x => x.AmmountAvailable);
         ChartExSeries chSerie = new ChartExSeries();
         chSerie.name = lbProduct;
