@@ -49,10 +49,10 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
         consolidateProduct.ProductTypeActives = new List<int>() { 3, 4 };
         consolidateProduct.ProductTypePasives = new List<int>() { 7 };
 
-        Render_Chart_Default();
+        GetDataProducts();
     }
 
-    public void Render_Chart_Default()
+    public void GetDataProducts()
     {
         Presenter.GetProducts();
 
@@ -61,7 +61,7 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
         {
             int valueFilter = int.Parse(typeProduct.Key.ToString());
             List<Product> collectionFilter = ProductsCollection.Where(x => x.Type == valueFilter).ToList();
-            CreateSeries(valueFilter, collectionFilter);
+            CreateDtoStructure(valueFilter, collectionFilter);
         }
         JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
         dtSeries = oSerializer1.Serialize(chListSeries);
@@ -70,8 +70,9 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
         dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
-    protected void Render_Chart_Line()
+    protected string GetDataProductsMovements()
     {
+        Presenter.GetMovements();
         foreach (ProductMovements item in ProductMovementsCollection)
         {
             ChartExSeries chSerie = new ChartExSeries();
@@ -81,13 +82,10 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
             chListSeries.Add(chSerie);
         }
         JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
-        dtSeries = oSerializer1.Serialize(chListSeries);
-
-        JavaScriptSerializer oSerializer2 = new JavaScriptSerializer();
-        dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
+        return oSerializer1.Serialize(chListSeries);
     }
 
-    protected void CreateSeries(int TypesProduct, List<Product> collectionDto)
+    protected void CreateDtoStructure(int TypesProduct, List<Product> collectionDto)
     {
         string lbProduct = (GetGlobalResourceObject("WebUILabels", string.Concat("Product_", TypesProduct)) == null ? string.Empty : GetGlobalResourceObject("WebUILabels", String.Concat("Product_", TypesProduct)).ToString());
         string lbDrill = String.Concat("Cuentas", "");

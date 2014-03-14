@@ -132,7 +132,7 @@ hs.addSlideshow({
 });
 
 
-var customChart = function createChart(series, drillDown, divContent) {
+var customChart = function createChart(series, drillDown, divContent, options) {
     var _allowExport = 'true',
         _titleXAxis = 'Productos',
         _titleYAxis = 'Valor',
@@ -143,17 +143,9 @@ var customChart = function createChart(series, drillDown, divContent) {
         _series = series,
         _series_drilldown = drillDown;
 
-    var options = {
-        plotOptions: {
-            series: {
-                dataLabels: { enabled: true }
-            }
-        }
-    };
     var chart1Options = {
         chart: {
             renderTo: divContent,
-            type: 'column',
             zoomType: 'xy'
         },
         title: { text: _titleChart },

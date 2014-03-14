@@ -67,15 +67,13 @@
         <div class="tab-content">
             <div class="tab-pane active" id="pnlIdHome">
                 <%-- Posicion Consolidada --%>
-                <asp:Panel runat="server" ID="chart1">
-                    <uc:PanelControl runat="server" ShowHeader="false">
-                        <ContentBody>
-                            <div class="col-md-12">
-                                <div id="demochart"></div>
-                            </div>
-                        </ContentBody>
-                    </uc:PanelControl>
-                </asp:Panel>
+                <uc:PanelControl runat="server" ShowHeader="false">
+                    <ContentBody>
+                        <div class="col-md-12">
+                            <div id="demochart"></div>
+                        </div>
+                    </ContentBody>
+                </uc:PanelControl>
             </div>
             <div class="tab-pane" id="pnlIdProfile">
                 <%-- Movimientos por Cuenta --%>
@@ -100,7 +98,6 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-
                             <div id="demochart1" class="col-md-12"></div>
                         </div>
                     </ContentBody>
@@ -108,27 +105,23 @@
             </div>
             <div class="tab-pane" id="messages">
                 <%-- Posicion Consolidada --%>
-                <asp:Panel runat="server" ID="Panel1">
-                    <uc:PanelControl runat="server" ShowHeader="false">
-                        <ContentBody>
-                            <div class="col-md-12">
-                                <div id="demochart2" class="col-md-12"></div>
-                            </div>
-                        </ContentBody>
-                    </uc:PanelControl>
-                </asp:Panel>
+                <uc:PanelControl runat="server" ShowHeader="false">
+                    <ContentBody>
+                        <div class="col-md-12">
+                            <div id="demochart2" class="col-md-12"></div>
+                        </div>
+                    </ContentBody>
+                </uc:PanelControl>
             </div>
             <div class="tab-pane" id="settings">
                 <%-- Posicion Consolidada --%>
-                <asp:Panel runat="server" ID="Panel2">
-                    <uc:PanelControl runat="server" ShowHeader="false">
-                        <ContentBody>
-                            <div class="col-md-12">
-                                <div id="demochart3" class="col-md-12"></div>
-                            </div>
-                        </ContentBody>
-                    </uc:PanelControl>
-                </asp:Panel>
+                <uc:PanelControl runat="server" ShowHeader="false">
+                    <ContentBody>
+                        <div class="col-md-12">
+                            <div id="demochart3" class="col-md-12"></div>
+                        </div>
+                    </ContentBody>
+                </uc:PanelControl>
             </div>
         </div>
     </section>
@@ -142,7 +135,7 @@
 <asp:Content ID="LateralContent" runat="server" ContentPlaceHolderID="LateralContent">
     <uc:ConsolidateProduct runat="server" ID="consolidateProduct"></uc:ConsolidateProduct>
     <div class="list-group">
-        <a href="#" class="list-group-item">Link</a>
+        <a href="#" class="list-group-item">Favoritos</a>
         <a href="#" class="list-group-item">Link</a>
         <a href="#" class="list-group-item">Link</a>
         <a href="#" class="list-group-item">Link</a>
@@ -159,22 +152,44 @@
 
             var series = JSON.parse('<%=dtSeries%>');
             var drill = JSON.parse('<%=dtDrillDownSeries%>');
+            var movents = JSON.parse('<%=GetDataProductsMovements()%>');
+            var options = {
+                chart: {
+                    type: 'column',
+                },
+                plotOptions: {
+                    series: {
+                        dataLabels: { enabled: true }
+                    }
+                }
+            };
+
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 console.log('tab');
                 var tabHref = $(e.target).attr('href');
 
                 if (tabHref == '#pnlIdHome')
-                    customChart(series, drill, 'demochart');
+                    customChart(series, drill, 'demochart', options);
                 if (tabHref == '#pnlIdProfile')
-                    customChart(series, drill, 'demochart1');
+                    var options = {
+                        chart: {
+                            type: 'line',
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: { enabled: true }
+                            }
+                        }
+                    };
+                customChart(movents, drill, 'demochart1', options);
                 if (tabHref == '#messages')
-                    customChart(series, drill, 'demochart2');
+                    customChart(series, drill, 'demochart2', options);
                 if (tabHref == '#settings')
-                    customChart(series, drill, 'demochart3');
+                    customChart(series, drill, 'demochart3', options);
             });
 
             $('#myTab a[href="#pnlIdHome"]').tab('show');
-            customChart(series, drill, 'demochart');
+            customChart(series, drill, 'demochart', options);
         });
     </script>
 </asp:Content>
