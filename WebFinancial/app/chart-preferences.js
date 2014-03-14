@@ -59,6 +59,7 @@ var myTheme = {
         tickWidth: 1,
         tickColor: '#000',
         labels: {
+            enabled: true,
             align: 'left',
             style: {
                 color: '#000',
@@ -129,3 +130,110 @@ hs.addSlideshow({
         hideOnMouseOut: false
     }
 });
+
+
+var customChart = function createChart(series, drillDown, divContent) {
+    var _allowExport = 'true',
+        _titleXAxis = 'Productos',
+        _titleYAxis = 'Valor',
+        _titleChart = 'Posicion Consolidada',
+        _xAxisType = 'category',
+        _seriesName = 'Producto',
+        _subTitleChart = 'Productos',
+        _series = series,
+        _series_drilldown = drillDown;
+
+    var options = {
+        plotOptions: {
+            series: {
+                dataLabels: { enabled: true }
+            }
+        }
+    };
+    var chart1Options = {
+        chart: {
+            renderTo: divContent,
+            type: 'column',
+            zoomType: 'xy'
+        },
+        title: { text: _titleChart },
+        subtitle: { text: _subTitleChart },
+        xAxis: {
+            title: { text: _titleXAxis },
+            type: _xAxisType
+        },
+        yAxis: {
+            title: { text: _titleYAxis },
+            labels: {
+                enabled: false,
+                x: 3,
+                y: 16,
+                formatter: function () {
+                    return Highcharts.numberFormat(this.value, 0);
+                }
+            }
+        },
+        plotOptions: {
+            series: {
+                color: "#058DC7",
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        mouseOver: function () {
+                            //$reporting.html('x: ' + this.x + ', y: ' + this.y);
+                        },
+                        click: function () {
+                            var contenido = '';
+                            contenido = '<strong>Concepto: </strong>' + this.msg + '<br/>';
+                            contenido += '<strong>Fecha: </strong>' + this.x + '<br/>';
+                            contenido += '<strong>Monto: </strong> USD' + this.y + '<br/>';
+
+                            $('body').append(customModal);
+                            //TITULO
+                            $('#testmodal').find($('h4')).html(this.series.name);
+                            //CONTENIDO
+                            $('#testmodal').find('.modal-body').html(contenido);
+                            //PIE PAGINA
+                            $('#testmodal').find('.modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>');
+                            $('#testmodal').modal({ keyboard: true, show: true });
+                            //hs.htmlExpand(null, {
+                            //    outlineType: 'rounded-white',
+                            //    pageOrigin: {
+                            //        x: this.pageX,
+                            //        y: this.pageY
+                            //    },
+                            //    headingText: this.series.name,
+                            //    maincontentText: '<strong>Concepto: </strong>' + this.msg + '<br/>' + '<strong>Fecha: </strong>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' + '<strong>Monto: </strong>USD ' + this.y.toFixed(2),
+                            //    width: 300
+                            //});
+                        }
+                    }
+                },
+                events: {
+                    mouseOut: function () {
+                        //$reporting.empty();
+                    }
+                },
+                borderWidth: 0,
+                dataLabels: {
+                    format: 'USD $ {point.y:,.2f}'
+                },
+                marker: { lineWidth: 1 }
+            }
+        },
+        series: [{
+            name: _seriesName,
+            colorByPoint: true,
+            data: _series,
+            lineWidth: 4,
+            marker: {
+                radius: 4
+            }
+        }],
+        drilldown: {
+            series: _series_drilldown
+        }
+    };
+    chart1Options = jQuery.extend(true, {}, options, chart1Options);
+    var chart1 = new Highcharts.Chart(chart1Options);
+}
