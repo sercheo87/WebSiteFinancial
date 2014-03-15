@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div id="demochart1" class="col-md-12"></div>
+                            <div id="demochart1"></div>
                         </div>
                     </ContentBody>
                 </uc:PanelControl>
@@ -107,9 +107,7 @@
                 <%-- Posicion Consolidada --%>
                 <uc:PanelControl runat="server" ShowHeader="false">
                     <ContentBody>
-                        <div class="col-md-12">
-                            <div id="demochart2" class="col-md-12"></div>
-                        </div>
+                        <div id="demochart2" class="col-md-12"></div>
                     </ContentBody>
                 </uc:PanelControl>
             </div>
@@ -153,13 +151,33 @@
             var series = JSON.parse('<%=dtSeries%>');
             var drill = JSON.parse('<%=dtDrillDownSeries%>');
             var movents = JSON.parse('<%=GetDataProductsMovements()%>');
-            var options = {
-                chart: {
-                    type: 'column',
-                },
+            var testdata =  <%=testarray%>;
+
+            var optionsMovents = {
+                chart: { type: 'line', },
+                title: { text: 'Movimientos de Cuentas' },
+                subtitle: { text: 'Detalle por rango de Fechas' },
+                plotOptions: {
+                    series: { dataLabels: { enabled: false } }
+                }
+            };
+            var optionsConsolidate = {
+                chart: { type: 'column' },
+                title: { text: 'Posicion Consolidada' },
+                subtitle: { text: 'Consolidado de las Cuentas' },
+                plotOptions: {
+                    series: { dataLabels: { enabled: true } }
+                }
+            };
+
+            var testarea = {                
+                rangeSelector: {enabled: true},
+                xAxis: { type: 'datetime' },        
+                scrollbar: { enabled: true },        
+                navigator: { enabled: true },
                 plotOptions: {
                     series: {
-                        dataLabels: { enabled: true }
+                        pointInterval:30 * 24 * 3600 * 1000 // one month
                     }
                 }
             };
@@ -169,27 +187,17 @@
                 var tabHref = $(e.target).attr('href');
 
                 if (tabHref == '#pnlIdHome')
-                    customChart(series, drill, 'demochart', options);
+                    customChart(series, drill, 'demochart', optionsConsolidate);
                 if (tabHref == '#pnlIdProfile')
-                    var options = {
-                        chart: {
-                            type: 'line',
-                        },
-                        plotOptions: {
-                            series: {
-                                dataLabels: { enabled: true }
-                            }
-                        }
-                    };
-                customChart(movents, drill, 'demochart1', options);
+                    customChart(movents, '{}', 'demochart1', optionsMovents);
                 if (tabHref == '#messages')
-                    customChart(series, drill, 'demochart2', options);
+                    customChart(testdata, '{}', 'demochart2', testarea);
                 if (tabHref == '#settings')
                     customChart(series, drill, 'demochart3', options);
             });
 
             $('#myTab a[href="#pnlIdHome"]').tab('show');
-            customChart(series, drill, 'demochart', options);
+            customChart(series, drill, 'demochart', optionsConsolidate);
         });
     </script>
 </asp:Content>

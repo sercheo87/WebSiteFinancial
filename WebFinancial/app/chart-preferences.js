@@ -91,8 +91,10 @@ var myTheme = {
     tooltip: {
         shared: true,
         crosshairs: true,
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>USD {point.y:,.2f}</b><br/>'
+        useHTML: true,
+        headerFormat: '<span style="font-size:11px">Detail</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.msg}</span><br><b>USD {point.y:,.2f}</b><br/>',
+        valueDecimals: 2
     },
     navigation: {
         buttonOptions: {
@@ -107,14 +109,18 @@ var myTheme = {
 
 //APPLY THEME
 Highcharts.setOptions(myTheme);
-
-
-Highcharts.Data.prototype.dateFormats['m/d/Y'] = {
-    regex: '^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2})$',
-    parser: function (match) {
-        return Date.UTC(+('20' + match[3]), match[1] - 1, +match[2]);
+Highcharts.setOptions({
+    global: {
+        useUTC: true
     }
-};
+});
+
+//Highcharts.Data.prototype.dateFormats['m/d/Y'] = {
+//    regex: '^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2})$',
+//    parser: function (match) {
+//        return Date.UTC(+('20' + match[3]), match[1] - 1, +match[2]);
+//    }
+//};
 hs.align = 'center';
 hs.transitions = ['expand', 'crossfade'];
 hs.outlineType = 'rounded-white';
@@ -136,34 +142,51 @@ var customChart = function createChart(series, drillDown, divContent, options) {
     var _allowExport = 'true',
         _titleXAxis = 'Productos',
         _titleYAxis = 'Valor',
-        _titleChart = 'Posicion Consolidada',
         _xAxisType = 'category',
         _seriesName = 'Producto',
-        _subTitleChart = 'Productos',
         _series = series,
         _series_drilldown = drillDown;
 
-    var chart1Options = {
+    var optionsChartBase = {
         chart: {
             renderTo: divContent,
             zoomType: 'xy'
         },
-        title: { text: _titleChart },
-        subtitle: { text: _subTitleChart },
         xAxis: {
             title: { text: _titleXAxis },
-            type: _xAxisType
+            dateTimeLabelFormats: { //custom date formats for different scales
+                second: '%H:%M:%S',
+                minute: '%H:%M',
+                hour: '%H:%M',
+                day: '%e. %b',
+                week: '%e. %b',
+                month: '%b', //month formatted as month only
+                year: '%Y'
+            }
         },
         yAxis: {
             title: { text: _titleYAxis },
             labels: {
-                enabled: false,
+                enabled: true,
                 x: 3,
                 y: 16,
                 formatter: function () {
                     return Highcharts.numberFormat(this.value, 0);
                 }
             }
+        },
+        rangeSelector: {
+            selected: 1,
+            enabled: false,
+            buttons: [
+                { type: 'minute', count: 1, text: '1min' },
+                { type: 'minute', count: 5, text: '5min' },
+                { type: 'minute', count: 60, text: '1hr' },
+                { type: 'week', count: 1, text: '1w' },
+                { type: 'month', count: 1, text: '1m' },
+                { type: 'year', count: 1, text: '1y' },
+                { type: 'all', text: 'All' }
+            ]
         },
         plotOptions: {
             series: {
@@ -181,6 +204,8 @@ var customChart = function createChart(series, drillDown, divContent, options) {
                             contenido += '<strong>Monto: </strong> USD' + this.y + '<br/>';
 
                             $('body').append(customModal);
+                            if (this.series.name == null)
+                                this.series.name = "";
                             //TITULO
                             $('#testmodal').find($('h4')).html(this.series.name);
                             //CONTENIDO
@@ -213,6 +238,12 @@ var customChart = function createChart(series, drillDown, divContent, options) {
                 marker: { lineWidth: 1 }
             }
         },
+        scrollbar: {
+            enabled: false
+        },
+        navigator: {
+            enabled: false
+        },
         series: [{
             name: _seriesName,
             colorByPoint: true,
@@ -226,6 +257,6 @@ var customChart = function createChart(series, drillDown, divContent, options) {
             series: _series_drilldown
         }
     };
-    chart1Options = jQuery.extend(true, {}, options, chart1Options);
-    var chart1 = new Highcharts.Chart(chart1Options);
+
+    var chart1 = new Highcharts.StockChart(Highcharts.merge(optionsChartBase, options));
 }

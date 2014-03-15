@@ -27,9 +27,9 @@
                     <asp:ScriptReference Path="~/Scripts/bootstrap-select.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.maskedinput-1.3.1.js" />
                     <asp:ScriptReference Path="~/Scripts/jquery.validate.js" />
-                    <asp:ScriptReference Path="~/app/Highcharts/js/highcharts-all.js" />
-                    <asp:ScriptReference Path="~/app/Highcharts/js/modules/data.js" />
-                    <asp:ScriptReference Path="~/app/Highcharts/js/modules/drilldown.js" />
+                    <asp:ScriptReference Path="~/app/Highstock/js/highstock.js" />
+                    <asp:ScriptReference Path="~/app/Highstock/js/modules/exporting.js" />
+                    <asp:ScriptReference Path="~/app/Highstock/js/modules/drilldown.js" />
                     <asp:ScriptReference Path="~/app/highslide-4.1.13/highslide/highslide-full.js" />
                     <asp:ScriptReference Name="respond" />
                     <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />

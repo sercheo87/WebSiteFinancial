@@ -1,4 +1,9 @@
 ﻿using DataObjects.Managment;
+using DotNet.Highcharts.Helpers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using Presentation.Managment;
 using System;
 using System.Collections.Generic;
@@ -17,6 +22,7 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
         //public List<object> data { get; set; }
         public string drilldown { get; set; }
         public object y { get; set; }
+        //public object x { get; set; }
         public string msg { get; set; }
     }
     public class ChartExDrillDown
@@ -70,8 +76,25 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
         dtDrillDownSeries = oSerializer2.Serialize(chListDrill);
     }
 
+    public string testarray
+    {
+        get
+        {
+            Presenter.GetMovements();
+            string data = "";
+            foreach (ProductMovements item in ProductMovementsCollection)
+            {
+                object[] obj = new object[] { new DateTime(item.Date.Year, item.Date.Month, item.Date.Day, 0, 0, 0, DateTimeKind.Utc), item.AmmountTransfer };
+                data += "{" + string.Format("x:Date.UTC({0}),y:{1},msg:'{2}'", item.Date.ToString("yyyy,MM,dd,H,mm,ss"), item.AmmountTransfer, item.Description) + "},";
+            }
+            data = data.Remove(data.Length - 1, 1);
+            string ret = string.Format("[{0}]", data);
+            return ret;
+        }
+    }
     protected string GetDataProductsMovements()
     {
+        List<ChartExSeries> collection = new List<ChartExSeries>();
         Presenter.GetMovements();
         foreach (ProductMovements item in ProductMovementsCollection)
         {
@@ -79,10 +102,10 @@ public partial class Default : WebView<SummaryPresenter>, ISummaryView
             chSerie.name = item.Date.ToShortDateString();
             chSerie.y = item.AmmountTransfer;
             chSerie.msg = item.Description;
-            chListSeries.Add(chSerie);
+            collection.Add(chSerie);
         }
         JavaScriptSerializer oSerializer1 = new JavaScriptSerializer();
-        return oSerializer1.Serialize(chListSeries);
+        return oSerializer1.Serialize(collection);
     }
 
     protected void CreateDtoStructure(int TypesProduct, List<Product> collectionDto)
