@@ -3,6 +3,9 @@
 <asp:Content ContentPlaceHolderID="MasterHeadContent" runat="Server">
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="MasterModalContent" runat="Server">
+    <asp:ContentPlaceHolder ID="ModalContent" runat="server" />
+</asp:Content>
 <asp:Content ContentPlaceHolderID="MasterMainContent" runat="Server">
     <div class="container">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -66,6 +69,18 @@
                 <%--Panel Lateral--%>
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                     <asp:ContentPlaceHolder ID="LateralContent" runat="server" />
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-success"><i class="fa fa-bookmark"></i> Favoritos</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item active">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                    </div>
                 </div>
             </div>
         </div>

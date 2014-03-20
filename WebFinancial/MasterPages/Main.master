@@ -14,6 +14,7 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
 </head>
 <body role="document">
+    <asp:ContentPlaceHolder ID="MasterModalContent" runat="server" />
     <div role="main" class="container">
         <form id="frmForm" runat="server">
             <asp:ScriptManager ID="scriptManager" runat="server">

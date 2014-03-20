@@ -132,19 +132,6 @@
 
 <asp:Content ID="LateralContent" runat="server" ContentPlaceHolderID="LateralContent">
     <uc:ConsolidateProduct runat="server" ID="consolidateProduct"></uc:ConsolidateProduct>
-    <div class="list-group">
-        <a href="#" class="list-group-item">Favoritos</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item active">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-    </div>
-
     <script>
         $(function () {
 
